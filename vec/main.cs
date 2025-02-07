@@ -86,7 +86,6 @@ class main
         else
             System.Console.WriteLine("The difference with scalar is incorrect\n");
 
-
         //Calulate the dot product of two vectors
         System.Console.WriteLine("\n======= Dot product:===========\n Should show:\n");
         var a = u.x * v.x + u.y * v.y + u.z * v.z;
@@ -98,18 +97,6 @@ class main
             System.Console.WriteLine("The dot product is correct\n");
         else
             System.Console.WriteLine("The dot product is incorrect\n");
-
-        // Calculate the division of two vectors
-        System.Console.WriteLine("\n======= Division:===========\n Should show:\n");
-        t = new vec(u.x / v.x, u.y / v.y, u.z / v.z);
-        t.print("u / v");
-        // Verify division vec.cs
-        System.Console.WriteLine("Shows:\n");
-        (u / v).print("u / v");
-        if (t.approx(u / v))
-            System.Console.WriteLine("The division is correct\n");
-        else
-            System.Console.WriteLine("The division is incorrect\n");
 
         // Calculate the division of a vector by a scalar
         System.Console.WriteLine("\n======= Division with scalar:===========\n Should show:\n");

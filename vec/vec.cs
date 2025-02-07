@@ -77,10 +77,6 @@ public class vec
         return v.x * w.x + v.y * w.y + v.z * w.z;
     }
 
-    public static vec operator /(vec v, vec u)
-    { // Division of two vectors
-        return new vec(v.x / u.x, v.y / u.y, v.z / u.z);
-    }
 
     public static vec operator /(vec v, double i)
     { // Division of a vector by a scalar
