@@ -20,7 +20,7 @@ public static class ex1
         for (int i = 1; i <= 10; i++)
         {
             double gammaValue = sfuns.fgamma(i);
-            System.Console.WriteLine($"fgamma({i}) = {gammaValue}");
+            System.Console.WriteLine($"fgamma({i}) = {gammaValue:F6}");
         }
 
         return 0;
