@@ -1,7 +1,5 @@
 using static System.Console;
-using System;
-using System.IO;
-using System.Threading;
+
 
 class main
 {
@@ -10,7 +8,7 @@ class main
     {
         var arg = (data)obj; // cast object to data
         arg.sum = 0; // initialize sum
-        for (int i = arg.a; i < arg.b; i++) arg.sum += 1.0 / i; // sum
+        for (int i = arg.a + 1; i <= arg.b; i++) arg.sum += 1.0 / i; // sum
     }
 
     public static int Main(string[] args)
@@ -37,11 +35,13 @@ class main
         var param = new data[nthreads]; // data structure for threads
         for (int i = 0; i < nthreads; i++) // initialize data structure
         {
-            param[i].a = i * nterms / nthreads + 1; // start
-            param[i].b = (i + 1) * nterms / nthreads + 1; // stop
+            param[i] = new data();
+            param[i].a = i * nterms / nthreads; // start
+            param[i].b = (i + 1) * nterms / nthreads; // stop
         }
         for (int i = 0; i < nthreads; i++)
         {
+
             threads[i] = new System.Threading.Thread(harm); // create thread
             threads[i].Start(param[i]); // run it with params[i] as argument to "harm"
         }
@@ -55,4 +55,5 @@ class main
         return 0;
 
     }
+
 }
