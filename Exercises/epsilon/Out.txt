@@ -1,0 +1,36 @@
+My maximum representable integer is = 2147483647
+The maximum representable integer is 2147483647
+
+The maximum representable integer is correct
+
+My minimum representable integer is = -2147483648
+The minimum representable integer is -2147483648
+
+The minimum representable integer is correct
+
+My machine epsilon for double is = 2.22044604925031E-16
+The machine epsilon for double is 2.22044604925031E-16
+
+The machine epsilon for double is correct
+
+My machine epsilon for float is = 1.192093E-07
+The machine epsilon for float is 1.19209289550781E-07
+
+The machine epsilon for float is correct
+
+a = 1, b = 1
+
+a==b ? False
+
+a - b = -2.22044604925031E-16
+
+a>1  ? False
+
+b>1  ? True
+
+a1 = 1, b1 = 1.0000000005, c1 = 1.0000000005
+
+a1==b1 ? True
+
+a1==c1 ? True
+
