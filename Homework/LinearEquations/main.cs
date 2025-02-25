@@ -24,7 +24,7 @@ class main
         {
             for (int j = 0; j < m; j++)
             {
-                A[i, j] = rand.Next(20); // random matrix A 
+                A[i, j] = rand.NextDouble(); // random matrix A 
             }
         }
 
@@ -103,7 +103,7 @@ class main
         vector b = new vector(n);
         for (int i = 0; i < m; i++)
         {
-            b[i] = rand.Next(20); // random vector b
+            b[i] = rand.NextDouble(); // random vector b
         }
 
         WriteLine($"b =");
@@ -128,6 +128,53 @@ class main
             WriteLine($"Ax != b");
         }
         WriteLine($"\n\n");
+
+
+        /*
+        Check that you function works as intended:
+
+            1. generate a random square matrix A (of a modest size);
+            2. factorize A into QR;
+            3. calculate the inverse B;
+            4. check that AB=I, where I is the identity matrix;
+        */
+
+        matrix B = new matrix(n, n);
+        for (int i = 0; i < n; i++)
+        {
+            for (int j = 0; j < n; j++)
+            {
+                B[i, j] = rand.NextDouble(); // random matrix B
+            }
+        }
+        WriteLine($"B =");
+        B.print();
+        WriteLine($"\n\n");
+        (matrix Q2, matrix R2) = QRGS.decomp(B);
+
+        matrix B_inv = QRGS.inverse(Q2, R2);
+        WriteLine($"B^-1 =");
+        B_inv.print();
+        WriteLine($"\n\n");
+
+        WriteLine($"Check if B*B^-1 = Id...");
+        matrix Id2 = new matrix(n, n);
+        Id2.set_identity();
+        matrix BBinv = B * B_inv;
+        WriteLine($"B*B^-1 =");
+        BBinv.print();
+        WriteLine($"\n");
+        if (Id2.approx(BBinv))
+        {
+            WriteLine($"B*B^-1 = Id");
+        }
+        else
+        {
+            WriteLine($"B*B^-1 != Id");
+        }
+        WriteLine($"\n\n");
+
+
 
     }
 }

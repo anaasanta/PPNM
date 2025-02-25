@@ -24,14 +24,14 @@ public static class QRGS
 
         for (int i = 0; i < m; i++)
         {
-            double Rii = Q[i].norm(); // norm of ai
+            double Rii = Q[i].norm(); // norm of Qi
             R[i, i] = Rii;
-            Q[i] /= Rii; //normalize ai
+            Q[i] /= Rii; //normalize Qi
             for (int j = i + 1; j < m; j++)
             {
-                double Rij = Q[i].dot(Q[j]); // dot product of ai and aj
+                double Rij = Q[i].dot(Q[j]); // dot product of Qi and Qj
                 R[i, j] = Rij;
-                Q[j] -= Q[i] * Rij; //subtract the projection of ai onto aj from aj
+                Q[j] -= Q[i] * Rij; //subtract the projection of ai onto aj from Qj
             }
         }
         return (Q, R);
@@ -57,5 +57,27 @@ public static class QRGS
         }
         return det;
     }
-    //public static matrix inverse(matrix Q, matrix R) { ... }
+
+    public static matrix inverse(matrix Q, matrix R)
+    {
+        /*
+        the inverse A-1 of a square nxn matrix A can be calculated by solving
+        n linear equations Axi = ei, where ei is the unit vector in the i-direction
+        The matrix made of columns xi is apparently the inverse of. A. 
+        */
+
+        matrix inv = new matrix(R.size1, R.size2);
+        matrix Id = matrix.id(R.size1);
+        for (int i = 0; i < R.size1; i++)
+        {
+            vector ei = Id[i];
+            vector xi = solve(Q, R, ei);
+            for (int j = 0; j < R.size2; j++)
+            {
+                inv[j, i] = xi[j];
+            }
+
+        }
+        return inv;
+    }
 }
