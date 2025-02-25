@@ -41,7 +41,7 @@ class main
         WriteLine($"\n\n");
 
 
-        WriteLine($"Check if R is upper triangular...");
+        WriteLine($"Check if R is upper triangular... \n");
         WriteLine($"R =");
         R.print();
         WriteLine($"\n");
@@ -59,7 +59,7 @@ class main
         WriteLine($"------------R is upper triangular \n\n");
 
 
-        WriteLine($"Check if Q^T*Q = 1...");
+        WriteLine($"Check if Q^T*Q = 1...\n");
         WriteLine($"Q =");
         Q.print();
         WriteLine($"\n");
@@ -76,7 +76,7 @@ class main
         }
         WriteLine($"\n\n");
 
-        WriteLine($"Check if QR = A...");
+        WriteLine($"Check if QR = A...\n");
         WriteLine($"QR =");
         QR.print();
         WriteLine($"\n");
@@ -93,50 +93,11 @@ class main
         /*
         Check that you "solve" works as intended:
 
-            1. generate a random square matrix A (of a modest size); (we use the same A as above)
+            1. generate a random square matrix B (of a modest size); 
             2. generate a random vector b (of the same size);
-            3. factorize A into QR; (already done it)
+            3. factorize B into QR; 
             4. solve QRx=b;
             5. check that Ax=b;
-        */
-
-        vector b = new vector(n);
-        for (int i = 0; i < m; i++)
-        {
-            b[i] = rand.NextDouble(); // random vector b
-        }
-
-        WriteLine($"b =");
-        b.print();
-        WriteLine($"\n\n");
-        WriteLine($"Solve QRx=b...");
-        vector x = QRGS.solve(Q, R, b);
-        WriteLine($"x =");
-        x.print();
-        WriteLine($"\n\n");
-        WriteLine($"Check if Ax = b...");
-        vector Ax = A * x;
-        WriteLine($"Ax =");
-        Ax.print();
-        WriteLine($"\n");
-        if (b.approx(Ax))
-        {
-            WriteLine($"Ax = b");
-        }
-        else
-        {
-            WriteLine($"Ax != b");
-        }
-        WriteLine($"\n\n");
-
-
-        /*
-        Check that you function works as intended:
-
-            1. generate a random square matrix A (of a modest size);
-            2. factorize A into QR;
-            3. calculate the inverse B;
-            4. check that AB=I, where I is the identity matrix;
         */
 
         matrix B = new matrix(n, n);
@@ -152,12 +113,55 @@ class main
         WriteLine($"\n\n");
         (matrix Q2, matrix R2) = QRGS.decomp(B);
 
+        vector b = new vector(n);
+        for (int i = 0; i < m; i++)
+        {
+            b[i] = rand.NextDouble(); // random vector b
+        }
+
+        WriteLine($"b =");
+        b.print();
+        WriteLine($"\n\n");
+
+
+        WriteLine($"Solve QRx=b...\n");
+        vector x = QRGS.solve(Q2, R2, b);
+        WriteLine($"x =");
+        x.print();
+        WriteLine($"\n\n");
+
+
+        WriteLine($"Check if Bx = b...");
+        vector Bx = B * x;
+        WriteLine($"Bx =");
+        Bx.print();
+        WriteLine($"\n");
+        if (b.approx(Bx))
+        {
+            WriteLine($"------------Bx = b");
+        }
+        else
+        {
+            WriteLine($"------------Bx != b");
+        }
+        WriteLine($"\n\n");
+
+
+        /*
+        Check that you function works as intended:
+
+            1. generate a random square matrix A (of a modest size) (we will use the same B as above);
+            2. factorize A into QR; (already done)
+            3. calculate the inverse B;
+            4. check that AB=I, where I is the identity matrix;
+        */
+
         matrix B_inv = QRGS.inverse(Q2, R2);
         WriteLine($"B^-1 =");
         B_inv.print();
         WriteLine($"\n\n");
 
-        WriteLine($"Check if B*B^-1 = Id...");
+        WriteLine($"Check if B*B^-1 = Id...\n");
         matrix Id2 = new matrix(n, n);
         Id2.set_identity();
         matrix BBinv = B * B_inv;
@@ -166,11 +170,11 @@ class main
         WriteLine($"\n");
         if (Id2.approx(BBinv))
         {
-            WriteLine($"B*B^-1 = Id");
+            WriteLine($"------------B*B^-1 = Id");
         }
         else
         {
-            WriteLine($"B*B^-1 != Id");
+            WriteLine($"------------B*B^-1 != Id");
         }
         WriteLine($"\n\n");
 
