@@ -2,6 +2,7 @@
 using System;
 using static System.Math;
 using System.Runtime.CompilerServices;
+
 public partial class matrix
 {
 
@@ -10,7 +11,7 @@ public partial class matrix
 
     public matrix(int n, int m)
     {
-        size1 = n; size2 = m; data = new double[size2][]; 
+        size1 = n; size2 = m; data = new double[size2][];
         for (int j = 0; j < size2; j++) data[j] = new double[size1];
     }
     public matrix(int n) : this(n, n) { }
@@ -130,6 +131,22 @@ public partial class matrix
                 u[i] += a[k, i] * v[k];
         return u;
     }
+
+    public vector backsub(vector c)
+    {
+        vector x = new vector(c.size);
+        for (int i = c.size - 1; i >= 0; i--)
+        {
+            double sum = 0;
+            for (int k = i + 1; k < c.size; k++)
+            {
+                sum += this[i, k] * x[k];
+            }
+            x[i] = (c[i] - sum) / this[i, i];
+        }
+        return x;
+    }
+
 
     public matrix(vector e) : this(e.size, e.size) { for (int i = 0; i < e.size; i++) this[i, i] = e[i]; }
 
