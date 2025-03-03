@@ -43,4 +43,4 @@ out.times.data: mainC.exe
 	done
 
 clean:
-	rm -f *.dll *.exe Out.txt out.times.data out err
+	rm -f *.dll *.exe Out.txt out.times.data out log.err
