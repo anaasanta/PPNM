@@ -43,7 +43,6 @@ public static class QRGS
         // 2. Solve R*x = y using back-substitution
         vector y = Q.T * b;
         vector x = new vector(R.size2);
-        // use back-subsitution method in matrix.cs
         x = R.backsub(y);
         return x;
 

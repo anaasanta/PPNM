@@ -4,7 +4,7 @@ using static System.Math;
 
 class main
 {
-    static void Main()
+    static int Main(string[] args)
     {
         /*
         Check that your "decomp" works as intended:
@@ -17,8 +17,32 @@ class main
         */
 
         Random rand = new Random();
-        int n = rand.Next(3, 10); // needs to be a modest size 
-        int m = rand.Next(2, n);  // m<n
+        /*
+        To change the size of the matrix manually
+        */
+        int n = 5;
+        int m = 3;
+        foreach (var arg in args)
+        {
+            var words = arg.Split('=');
+            if (words[0] == "n")
+            {
+                n = int.Parse(words[1]);
+            }
+            else if (words[0] == "m")
+            {
+                m = int.Parse(words[1]);
+            }
+        }
+
+        WriteLine($"n = {n}, m = {m}\n\n");
+        /*
+        To create random matrix
+        */
+
+        //int n = rand.Next(3, 10); // needs to be a modest size 
+        //int m = rand.Next(2, n);  // m<n
+
         matrix A = new matrix(n, m);
         for (int i = 0; i < n; i++)
         {
@@ -177,6 +201,8 @@ class main
             WriteLine($"------------B*B^-1 != Id");
         }
         WriteLine($"\n\n");
+
+        return 0;
 
 
 
