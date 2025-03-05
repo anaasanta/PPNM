@@ -52,7 +52,7 @@ wavefunction.svg: wavefunction.txt Makefile
 	echo "set terminal svg; \
 		set output 'wavefunction.svg'; \
 		set terminal svg background rgb 'white';\
-		set key outside; \
+		set key bottom right; \
 		set title 'Wavefunctions'; \
 		set xlabel 'r'; \
 	    plot 'wavefunction.txt' using 1:2 with linespoints title 'wavefunction 1' lc 'red', \
