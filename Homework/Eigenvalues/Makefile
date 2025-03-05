@@ -65,5 +65,28 @@ wavefunction.svg: wavefunction.txt Makefile
 wavefunction.txt: exerciseB.exe
 	mono exerciseB.exe rmax=10 dr=0.3 mode=wavefunction
 
+exerciseC.exe: exerciseC.cs matrix.dll vector.dll jacobi.dll
+	mcs -target:exe -out:exerciseC.exe -reference:matrix.dll -reference:vector.dll -reference:jacobi.dll exerciseC.cs
+
+diagonalization.txt: exerciseC.exe
+	for n in $$(seq 10 10 100); do \
+		mono exerciseC.exe n=$$n repetitions=10>> diagonalization.txt & \
+		done; \
+		wait 
+
+plot.diagonalization.svg: diagonalization.txt Makefile
+	echo "set terminal svg; \
+		set output 'plot.diagonalization.svg'; \
+		set terminal svg background rgb 'white';\
+		set key bottom right; \
+		set title 'Diagonalization time'; \
+		set xlabel 'n'; \
+	    set ylabel 'time'; \
+		a=1; b=3; \
+		f(x) = a*x**b; \
+		fit f(x) '$<' via a,b; \
+	    plot 'diagonalization.txt' using 1:2 with linespoints title 'time vs n', \
+			  f(x) with lines title 'N^3" | gnuplot
+
 clean:
 	rm -f *.dll *.exe Out.txt wavefunction.txt convergence_dr.txt convergence_rmax.txt plot.convergence_dr.svg plot.convergence_rmax.svg 
