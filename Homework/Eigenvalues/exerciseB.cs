@@ -85,7 +85,8 @@ class exerciseB
                     double f2 = 1.0 / Sqrt(dr) * eigenvect[i, 2];
                     double f3 = 1.0 / Sqrt(dr) * eigenvect[i, 3];
                     double f4 = 1.0 / Sqrt(dr) * eigenvect[i, 4];
-                    double f5 = 1.0 / Sqrt(dr) * eigenvect[i, 5];
+                    // anaylitic function: 1/Sqrt(pi) * Exp(-r)
+                    double f5 = 1.0 / Sqrt(PI) * Exp(-r[i]);
                     file.WriteLine($"{r[i]} {f1} {f2} {f3} {f4} {f5}");
                 }
                 file.WriteLine("\n\n");

@@ -52,14 +52,14 @@ wavefunction.svg: wavefunction.txt Makefile
 	echo "set terminal svg; \
 		set output 'wavefunction.svg'; \
 		set terminal svg background rgb 'white';\
+		set key outside; \
 		set title 'Wavefunctions'; \
 		set xlabel 'r'; \
-	    set ylabel 'u(r)'; \
 	    plot 'wavefunction.txt' using 1:2 with linespoints title 'wavefunction 1' lc 'red', \
 	    	 'wavefunction.txt' using 1:3 with linespoints title 'wavefunction 2' lc 'blue', \
 	    	 'wavefunction.txt' using 1:4 with linespoints title 'wavefunction 3' lc 'green', \
 	    	 'wavefunction.txt' using 1:5 with linespoints title 'wavefunction 4' lc 'yellow', \
-	    	 'wavefunction.txt' using 1:6 with linespoints title 'wavefunction 5' lc 'pink'" | gnuplot
+	    	 'wavefunction.txt' using 1:6 with linespoints title 'analytical function' lc 'pink'" | gnuplot
 
 
 wavefunction.txt: exerciseB.exe
