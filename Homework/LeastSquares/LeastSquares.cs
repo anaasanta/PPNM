@@ -25,17 +25,22 @@ public static class LeastSquares
         }
 
         Func<double, double>[] fs = { t => 1.0, t => -t };
-        vector c = lsfit(fs, x, Y, dY);
+        (vector c, matrix cov) = lsfit(fs, x, Y, dY);
 
         double ln_a = c[0];
         double lambda = c[1];
         double a = Exp(ln_a);
         double halfLife = Log(2) / lambda;
+        double delta_lambda = Sqrt(cov[1, 1]);
+        double delta_halfLife = Log(2) / (lambda * lambda) * delta_lambda;
+
 
         WriteLine("Results of the fit:");
         WriteLine($"a = {a}");
         WriteLine($"λ = {lambda}");
         WriteLine($"T₁/₂ = {halfLife}");
+        WriteLine($"δλ = {delta_lambda}");
+        WriteLine($"δT₁/₂ = {delta_halfLife}");
 
         using (StreamWriter file = new StreamWriter("exA_data.txt"))
         {
@@ -60,6 +65,34 @@ public static class LeastSquares
         return 0;
     }
 
+
+    public static (vector, matrix) lsfit(Func<double, double>[] fs, vector x, vector y, vector dy)
+    { // In this one, we also calculate the covariance matrix and the uncertanties of the fitting coefficients
+        int n = x.size;
+        int m = fs.Length;
+        matrix A = new matrix(n, m);
+        vector b = new vector(n);
+        for (int i = 0; i < n; i++)
+        {
+            b[i] = y[i] / dy[i];
+            for (int k = 0; k < m; k++)
+            {
+                A[i, k] = fs[k](x[i]) / dy[i];
+            }
+        }
+        var (Q, R) = QRGS.decomp(A);
+        vector c = QRGS.solve(Q, R, b);
+
+        matrix Atrans = A.T;
+        matrix AT = Atrans * A;
+        (matrix QAT, matrix RAT) = QRGS.decomp(AT);
+        matrix cov = QRGS.inverse(QAT, RAT);
+
+        return (c, cov);
+
+    }
+
+    /* //LSFIT FROM EXERCISE A
     public static vector lsfit(Func<double, double>[] fs, vector x, vector y, vector dy)
     {
         int n = x.size;
@@ -78,4 +111,5 @@ public static class LeastSquares
         vector c = QRGS.solve(Q, R, b);
         return c;
     }
+    */
 }
