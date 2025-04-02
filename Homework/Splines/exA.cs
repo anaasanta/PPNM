@@ -2,9 +2,7 @@ using static System.Console;
 using static System.Math;
 using System;
 
-
-
-class main
+class exA
 {
 
     public static double linterp(double[] x, double[] y, double z)
@@ -75,8 +73,7 @@ class main
 
     static int Main(string[] args)
     {
-
-
+        
         vector x = new vector(10);
         vector y = new vector(10);
         for (int i = 0; i < 10; i++)
