@@ -2,48 +2,76 @@ using static System.Console;
 using static System.Math;
 using System;
 
-public class qspline
+public class cspline
 {
-    public vector x, y, b, c;
+    public vector x, y, b, c, d;
     private int n;
 
-    public qspline(vector xs, vector ys)
+    public cspline(vector xs, vector ys)
     {
         n = xs.size;
         if (ys.size != n)
             throw new Exception("xs and ys must have the same length");
-        b = new vector(n - 1);
+        b = new vector(n);
         c = new vector(n - 1);
+        d = new vector(n - 1);
         this.x = xs.copy();
         this.y = ys.copy();
 
+
         vector h = new vector(n - 1);  // lengths of intervals
         vector p = new vector(n - 1);  // slopes of intervals
+
 
         for (int i = 0; i < n - 1; i++)
         {
             h[i] = x[i + 1] - x[i];
             if (h[i] <= 0)
                 throw new Exception("x[i+1] must be greater than x[i]");
-            p[i] = (y[i + 1] - y[i]) / h[i];
-        }
-
-
-        c[0] = 0.0;
-        for (int i = 0; i < n - 2; i++)
-        {
-            c[i + 1] = (p[i + 1] - p[i] - c[i] * h[i]) / h[i + 1];
-        }
-        c[n - 2] /= 2.0;
-        for (int i = n - 3; i >= 0; i--)
-        {
-            c[i] = (p[i + 1] - p[i] - c[i + 1] * h[i + 1]) / h[i];
         }
 
         for (int i = 0; i < n - 1; i++)
         {
-            b[i] = p[i] - c[i] * h[i];
+            p[i] = (y[i + 1] - y[i]) / h[i];
         }
+
+        vector D = new vector(n);
+        vector Q = new vector(n - 1);
+        vector B = new vector(n); // building the tridiagonal system
+
+        D[0] = 2;
+        Q[0] = 1;
+        for (int i = 0; i < n - 2; i++)
+        {
+            D[i + 1] = 2 * h[i] / h[i + 1] + 2;
+            Q[i + 1] = h[i] / h[i + 1];
+        }
+        D[n - 1] = 2;
+
+        B[0] = 3 * p[0];
+        for (int i = 0; i < n - 2; i++)
+        {
+            B[i + 1] = 3 * (p[i] + p[i + 1] * h[i] / h[i + 1]);
+        }
+        B[n - 1] = 3 * p[n - 2]; //Gauss elimination
+
+        for (int i = 1; i < n; i++)
+        {
+            D[i] -= Q[i - 1] / D[i - 1];
+            B[i] -= B[i - 1] / D[i - 1];
+        }
+
+        b[n - 1] = B[n - 1] / D[n - 1]; //back-substitution
+        for (int i = n - 2; i >= 0; i--)
+        {
+            b[i] = (B[i] - Q[i] * b[i + 1]) / D[i];
+        }
+        for (int i = 0; i < n - 1; i++)
+        {
+            c[i] = (-2 * b[i] - b[i + 1] + 3 * p[i]) / h[i];
+            d[i] = (b[i + 1] + b[i] - 2 * p[i]) / (h[i] * h[i]);
+        }
+
     }
 
     public double evaluate(double z)
@@ -56,9 +84,9 @@ public class qspline
         }
 
         double h = z - x[i];
-        return y[i] + h * (b[i] + h * c[i]);
-    }
+        return y[i] + h * (b[i] + h * (c[i] + h * d[i]));
 
+    }
     public double derivative(double z)
     {/* evaluate the derivative*/
 
@@ -69,7 +97,7 @@ public class qspline
         }
 
         double h = z - x[i];
-        return b[i] + 2 * c[i] * h;
+        return b[i] + 2 * c[i] * h + 3 * d[i] * h * h;
 
     }
 
@@ -85,10 +113,10 @@ public class qspline
         for (int j = 0; j < i; j++)
         {
             dx = x[j + 1] - x[j];
-            a += y[j] * dx + b[j] * dx * dx / 2.0 + c[j] * dx * dx * dx / 3.0;
+            a += y[j] * dx + b[j] * dx * dx / 2.0 + c[j] * dx * dx * dx / 3.0 + d[j] * dx * dx * dx * dx / 4.0;
         }
 
-        a += y[i] * (z - x[i]) + b[i] * (z - x[i]) * (z - x[i]) / 2 + c[i] * (z - x[i]) * (z - x[i]) * (z - x[i]) / 3.0;
+        a += y[i] * (z - x[i]) + b[i] * (z - x[i]) * (z - x[i]) / 2 + c[i] * (z - x[i]) * (z - x[i]) * (z - x[i]) / 3.0 + d[i] * (z - x[i]) * (z - x[i]) * (z - x[i]) * (z - x[i]) / 4.0;
 
         return a;
 
@@ -128,7 +156,7 @@ public class qspline
             x[i] = i;
             y[i] = Sin(i);
         }
-        qspline s = new qspline(x, y);
+        cspline s = new cspline(x, y);
         double sinz, derz, integz;
         for (double z = x[0]; z < x[x.size - 1]; z += 0.1)
         {
@@ -142,3 +170,4 @@ public class qspline
         return 0;
     }
 }
+
