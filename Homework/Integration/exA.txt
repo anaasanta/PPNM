@@ -1,0 +1,14 @@
+Testing adaptive integrator on known integrals: 
+
+Function = sqrt(x). Exact = 6.666667E-001. Computed = 6.666667E-001. Error = 1.301856E-008
+sqrt(x) integral passed. 
+
+Function = 1/sqrt(x). Exact = 2.000000E+000. Computed = 2.000000E+000. Error = 1.050844E-009
+1/sqrt(x) integral passed. 
+
+Function = sqrt(1-x^2). Exact = 1.570796E+000. Computed = 7.853982E-001. Error = 7.853982E-001
+Error: sqrt(1-x^2) integral failed! 
+
+Function = ln(x)/sqrt(x). Exact = -4.000000E+000. Computed = -4.000000E+000. Error = 5.869474E-010
+ln(x)/sqrt(x) integral passed. 
+
