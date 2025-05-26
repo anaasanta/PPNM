@@ -1,0 +1,3 @@
+exp(x)               calls=    75  result=2.71828183e+00  err_est=1.54e-04
+x*exp(-x)            calls=   105  result=1.00000000e+00  err_est=6.36e-06
+exp(-x^2)            calls=   150  result=1.77245385e+00  err_est=4.32e-06

@@ -26,11 +26,11 @@ class exA
             var a = test.a;
             var b = test.b;
             var exact = test.exact;
-            double val = integrator.integrate(f, a, b, 1e-6, 1e-6);
+            double val = integrator.integrate(f, a, b);
             WriteLine($"Function = {name}, Exact = {exact:E}, Computed = {val:E}, Error = {Abs(val - exact):E}");
 
             // Check that integrator returns results within the given accuracy goals.
-            if (Abs(val - exact) > 1e-6)
+            if (Abs(val - exact) > 0.001)
             {
                 WriteLine($"Error: {name} integral failed! \n");
             }

@@ -1,0 +1,2 @@
+1/sqrt(x)            calls=   231  result=2.00000000e+00  err_est=5.77e-15
+ln(x)/sqrt(x)        calls=   315  result=-4.00000000e+00  err_est=1.35e-13
