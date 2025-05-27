@@ -46,7 +46,27 @@ class main
 
         }
 
-        // EXERCISE B: 
+        // EXERCISE B: Compare the scaling of the error with your pseudo-random Monte-Carlo integrator.
+
+        f = (x) => (x[0] * x[0] + x[1] * x[1] <= r * r) ? 1.0 : 0.0; // function to integrate
+        a = new vector(2); // lower limit of integration
+        b = new vector(2); // upper limit of integration
+        a[0] = -r; a[1] = -r; // set lower limit
+        b[0] = r; b[1] = r; // set upper limit
+        using (var file = new StreamWriter("pseudoVSquasi.txt"))
+        {
+            var resultQ = mc.quasirandmc(f, a, b, 10000); // perform quasi-random Monte Carlo integration
+            var resultP = mc.plainmc(f, a, b, 10000); // perform pseudo-random Monte Carlo integration
+            double areaP = resultP.Item1; // estimated area
+            double errorP = resultP.Item2; // estimated error
+            double actual_errorP = Abs(areaP - PI); // actual error compared to the known value of PI
+            double areaQ = resultQ.Item1; // estimated area
+            double errorQ = resultQ.Item2; // estimated error
+            double actual_errorQ = Abs(areaQ - PI); // actual error compared to the known value of PI
+            file.WriteLine($"Quasi-random: Area = {areaQ}, Error = {errorQ}, Actual Error = {actual_errorQ}");
+            file.WriteLine($"Pseudo-random: Area = {areaP}, Error = {errorP}, Actual Error = {actual_errorP}");
+        }
+
 
         return 0;
     }
