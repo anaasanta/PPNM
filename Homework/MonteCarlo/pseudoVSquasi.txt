@@ -1,2 +1,0 @@
-Quasi-random: Area = 3.1404. Error = 0.0116178479934969. Actual Error = 0.00119265358979304
-Pseudo-random: Area = 3.1372. Error = 0.0164522830026717. Actual Error = 0.00439265358979313

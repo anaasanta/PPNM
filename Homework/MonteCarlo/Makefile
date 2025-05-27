@@ -6,9 +6,9 @@ integral.txt: Makefile main.exe
 	mono main.exe > integral.txt
 	sed -i 's/,/./g' integral.txt
 
-pseudoVSquasi.txt: Makefile main.exe
-	mono main.exe > pseudoVSquasi.txt
-	sed -i 's/,/./g' pseudoVSquasi.txt
+pseuVquaVstra.txt: Makefile main.exe
+	mono main.exe > pseuVquaVstra.txt
+	sed -i 's/,/./g' pseuVquaVstra.txt
 
 main.exe: main.cs mc.dll vector.dll
 	mcs -r:mc.dll -r:vector.dll main.cs -out:main.exe

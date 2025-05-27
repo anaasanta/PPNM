@@ -37,26 +37,29 @@ class main
         b[0] = PI; b[1] = PI; b[2] = PI; // set upper limit
         using (var file = new StreamWriter("integral.txt"))
         {
-            file.WriteLine("N Volume Error ActualError");
+            file.WriteLine("N \t\tVolume \t\t\tError \t\t\t\tActualError");
             var result = mc.plainmc(f, a, b, 1000000); // perform Monte Carlo integration with 0 points to get the volume
             double volume = result.Item1 / (PI * PI * PI); // volume of the integration domain
             double error = result.Item2 / (PI * PI * PI); // estimated error
-            file.WriteLine($"Volume: {volume} Error: {error} Actual Error: {Abs(volume - 1.3932039296856768591842462603255)}");
+            file.WriteLine($"{N} {volume} {error} {Abs(volume - 1.3932039296856768591842462603255)}");
 
 
         }
 
-        // EXERCISE B: Compare the scaling of the error with your pseudo-random Monte-Carlo integrator.
+        // EXERCISE B and C
 
         f = (x) => (x[0] * x[0] + x[1] * x[1] <= r * r) ? 1.0 : 0.0; // function to integrate
         a = new vector(2); // lower limit of integration
         b = new vector(2); // upper limit of integration
         a[0] = -r; a[1] = -r; // set lower limit
         b[0] = r; b[1] = r; // set upper limit
-        using (var file = new StreamWriter("pseudoVSquasi.txt"))
+        using (var file = new StreamWriter("pseuVquaVstra.txt"))
         {
             var resultQ = mc.quasirandmc(f, a, b, 10000); // perform quasi-random Monte Carlo integration
             var resultP = mc.plainmc(f, a, b, 10000); // perform pseudo-random Monte Carlo integration
+            var resultS = mc.strata(f, a, b); // perform stratified Monte Carlo integration
+            double areaS = resultS.Item1;
+            double errS = resultS.Item2;
             double areaP = resultP.Item1; // estimated area
             double errorP = resultP.Item2; // estimated error
             double actual_errorP = Abs(areaP - PI); // actual error compared to the known value of PI
@@ -65,6 +68,7 @@ class main
             double actual_errorQ = Abs(areaQ - PI); // actual error compared to the known value of PI
             file.WriteLine($"Quasi-random: Area = {areaQ}, Error = {errorQ}, Actual Error = {actual_errorQ}");
             file.WriteLine($"Pseudo-random: Area = {areaP}, Error = {errorP}, Actual Error = {actual_errorP}");
+            file.WriteLine($"Stratified: Area = {areaS}, Error = {errS}, Actual Error = {Math.Abs(areaS - PI)}");
         }
 
 

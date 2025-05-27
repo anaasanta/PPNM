@@ -63,6 +63,127 @@ public class mc
         return result;
     }
 
+    public static (double, double) strata(Func<vector, double> f, vector a, vector b, double acc = 0.01, double eps = 0.01, int n_reuse = 0, double mean_reuse = 0, int nmin = 32)
+    {
+        int dim = a.size; // dimension of the integral
+        int N = 16 * dim; // number of points in each stratum
+        if (N < nmin)
+        {
+            return plainmc(f, a, b, N); // if the number of points is less than 32, use plain Monte Carlo integration
+        }
+        double V = 1;
+        for (int k = 0; k < dim; k++)
+        {
+            V *= b[k] - a[k]; // calculate the volume of the hyperrectangle
+        }
+        double sum = 0.0, sum2 = 0.0; // sum and sum of squares
+        double[] sumLeft = new double[dim]; // array to store the sum for the left stratum
+        double[] sumRight = new double[dim]; // array to store the sum for the right stratum
+        double[] sum2Left = new double[dim]; // array to store the sum of squares for the left stratum
+        double[] sum2Right = new double[dim]; // array to store the sum of squares for the right stratum
+
+        var mean_left = new double[dim]; // array to store the mean of each stratum
+        var mean_right = new double[dim]; // array to store the mean of each stratum
+        var n_left = new int[dim]; // array to store the number of points in each stratum
+        var n_right = new int[dim]; // array to store the number of points in each stratum
+        var x = new vector(dim); // point in the integration domain
+
+        var rnd = new Random(); // random number generator
+
+        for (int i = 0; i < N; i++)
+        {
+            for (int k = 0; k < dim; k++)
+            {
+                x[k] = a[k] + (b[k] - a[k]) * (rnd.NextDouble()); // generate a point in the integration domain
+            }
+            double fx = f(x); // evaluate the function at the point
+            sum += fx; // accumulate the sum
+            sum2 += fx * fx; // accumulate the sum of squares
+
+
+            for (int k = 0; k < dim; k++)
+            {
+                double mid = (a[k] + b[k]) / 2; // calculate the midpoint of the stratum
+                if (x[k] <= mid)
+                {
+                    mean_left[k] += fx; // accumulate the mean for the left stratum
+                    n_left[k]++; // increment the number of points in the left stratum
+                    sumLeft[k] += fx; // accumulate the sum for the left stratum
+                    sum2Left[k] += fx * fx; // accumulate the sum of squares for the left stratum
+                }
+
+                else
+                {
+                    mean_right[k] += fx; // accumulate the mean for the right stratum
+                    n_right[k]++; // increment the number of points in the right stratum
+                    sumRight[k] += fx; // accumulate the sum for the right stratum
+                    sum2Right[k] += fx * fx; // accumulate the sum of squares for the right stratum
+                }
+            }
+        }
+
+        double mean = sum / N; // calculate the overall mean
+        double variable = sum2 / N - mean * mean; // calculate the variance
+        double var_left = 0.0; // variance for the left stratum
+        double var_right = 0.0; // variance for the right stratum
+
+        int kdiv = 0;
+        double maxvar = 0.0; // maximum variance
+
+        for (int k = 0; k < dim; k++)
+        {
+            if (n_left[k] > 0)
+            {
+                mean_left[k] /= n_left[k]; // calculate the mean for the left stratum
+                var_left = sum2Left[k] / n_left[k] - mean_left[k] * mean_left[k]; // calculate the variance for the left stratum
+            }
+            if (n_right[k] > 0)
+            {
+                mean_right[k] /= n_right[k]; // calculate the mean for the right stratum
+                var_right = sum2Right[k] / n_right[k] - mean_right[k] * mean_right[k]; // calculate the variance for the right stratum
+            }
+            double tot_var = var_left + var_right; // total variance for the dimension
+            if (tot_var > maxvar)
+            {
+                maxvar = tot_var; // update the maximum variance
+                kdiv = k; // store the index of the dimension with the maximum variance
+            }
+        }
+
+        for (int k = 0; k < dim; k++)
+        {
+            variable = Abs(mean_right[k] - mean_left[k]);
+            if (variable > maxvar)
+            {
+                maxvar = variable; // update the maximum variance
+                kdiv = k; // store the index of the dimension with the maximum variance
+            }
+        }
+
+        double integ = (mean * N + mean_reuse * n_reuse) / (N + n_reuse) * V; // calculate the integral using the means from the strata and the reused points
+        double error = Abs(mean_reuse - mean) * V;
+        double toler = acc + Abs(integ) * eps;
+
+        if (error < toler)
+        {
+            return (integ, error); // if the error is within the tolerance, return the integral and error
+        }
+
+        var a2 = a.copy(); // create a copy of the lower limits of integration
+        var b2 = b.copy(); // create a copy of the upper limits of integration
+
+        double middiv = 0.5 * (a[kdiv] + b[kdiv]); // calculate the midpoint of the dimension with the maximum variance
+
+        b2[kdiv] = middiv; // set the upper limit of integration for the left stratum
+        a2[kdiv] = middiv; // set the lower limit of integration for the right stratum
+
+        var (integ_left, err_left) = strata(f, a, b2, acc / Math.Sqrt(2), eps, n_left[kdiv], mean_left[kdiv]); // recursively calculate the integral for the left stratum
+        var (integ_right, err_right) = strata(f, a2, b, acc / Math.Sqrt(2), eps, n_right[kdiv], mean_right[kdiv]); // recursively calculate the integral for the right stratum
+
+        return (integ_left + integ_right, err_left + err_right); // return the sum of the integrals and errors from both strata
+    }
+
+
 }
 
 public class Halton
