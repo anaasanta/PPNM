@@ -62,7 +62,7 @@ erf.svg: erf.txt
 		set xlabel 'x'; set ylabel 'erf(x)';\
 		set key left top;\
 		plot 'erf.txt' using 1:2 with linespoints lt rgb 'blue' pt 7 ps 1.0 title 'Computed erf',\
-  			 'erf.txt' using 1:3 with linespoints lt rgb 'red'  pt 7 ps 1.0 title 'MathNet Erf'\
+  			 'erf.txt' using 1:3 with linespoints lt rgb 'red'  pt 7 ps 1.0 title 'Exact Erf'\
 		" | gnuplot
 
 erf1.svg: erf1.txt
