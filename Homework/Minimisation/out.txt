@@ -1,9 +1,0 @@
-Running Newton's method on Rosenbrock function...
-Rosenbrock minimum: (0.999990965928156, 0.999981917232891), iterations: 23
-
-Running Newton's method on Himmelblau's function...
-Himmelblau minimum: (-2.80511811153093, 3.13131248799483), iterations: 4
-
-Running Newton's method on Breit-Wigner fit...
-Converged in 1000 iterations.
-Fitted parameters: m = 124.693434512314, Gamma = 2.49302986361308, A = 8.35550401796124

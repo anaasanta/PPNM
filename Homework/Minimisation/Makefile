@@ -1,5 +1,5 @@
 Out.txt: main.exe
-	mono main.exe < higgs.data.txt 1> out.txt 2> log.txt
+	mono main.exe < higgs.data.txt 1> Out.txt 2> log.txt
 
 minimisation.dll: minimisation.cs QRGS.dll matrix.dll vector.dll solveODE.dll
 	mcs -target:library -out:minimisation.dll -reference:QRGS.dll -reference:matrix.dll -reference:vector.dll -reference:solveODE.dll minimisation.cs
@@ -31,6 +31,7 @@ higgs_bosson.svg: higgs.data.txt breit_wigner_fit.dat
 	  'higgs.data.txt'       using 1:2:3 with yerrorbars lt 1 lw 1 pt 7 title 'Data', \
 	  'breit_wigner_fit.dat' using 1:3   with lines     lt 2 lw 2      title 'Fit';\
 	" | gnuplot
+
 
 clean:
 	rm -f *.svg *.dll *.exe *.txt *.svg
