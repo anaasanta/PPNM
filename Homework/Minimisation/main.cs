@@ -105,6 +105,7 @@ class main
 
 
         // EXERCISE C
+        // two different starts 
         WriteLine($"\n Rosenbrock minimum, with forward v central difference starting at {startR.print()}");
         var (rootR_f, iterR_f) = minimisation.newton(rosenbrock, startR, 1e-6);
         WriteLine($"\tForward difference:");
