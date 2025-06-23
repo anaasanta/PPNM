@@ -84,7 +84,7 @@ class main
         };
 
 
-        var (rootBW, iterBW) = minimisation.newton(phi, new vector(125.0, 2.0, 10.0));
+        var (rootBW, iterBW) = minimisation.newton(phi, new vector(125.0, 2.0, 11.0));
 
         // Write the initial guess and function value to a file
         WriteLine("\nRunning Newton's method on Breit-Wigner fit...");

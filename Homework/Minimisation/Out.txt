@@ -1,0 +1,37 @@
+Running Newton's method on Rosenbrock function...
+Rosenbrock minimum: (0.999879545408398, 0.999758132292078), iterations: 20
+
+Running Newton's method on Himmelblau's function...
+Himmelblau minimum: (-2.8051315751519, 3.13131366562992), iterations: 3
+
+Running Newton's method on Breit-Wigner fit...
+Converged in 10 iterations.
+Fitted parameters: m = 125.972185379146, Gamma = 2.0864168176945, A = 9.87657754232932
+
+ Rosenbrock minimum, with forward v central difference starting at (-1.2, 1)
+	Forward difference:
+		Rosenbrock minimum: (0.999990965928156, 0.999981917232891), iterations: 23
+
+	Central difference:
+		Rosenbrock minimum: (0.99999999993164, 0.999999999862008), iterations: 21
+
+ Rosenbrock minimum, with forward v central difference, starting at (1.2, 1)
+	Forward difference:
+		Rosenbrock minimum: (0.999999004181705, 0.999997966986954), iterations: 1000
+
+	Central difference:
+		Rosenbrock minimum: (1.0000000000011, 1.00000000000217), iterations: 8
+
+ Himmelblau minimum, with forward v central difference starting at (-2, 3)
+	Forward difference:
+		Himmelblau minimum: (-2.80511811153093, 3.13131248799483), iterations: 4
+
+	Central difference:
+		Himmelblau minimum: (-2.80511808706469, 3.13131251825746), iterations: 4
+
+ Himmelblau minimum, with forward v central difference, starting at (2, 3)
+	Forward difference:
+		Himmelblau minimum: (2.99999997173995, 1.99999999428195), iterations: 6
+
+	Central difference:
+		Himmelblau minimum: (2.99999999841902, 2.00000000713126), iterations: 5
