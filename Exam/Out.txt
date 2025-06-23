@@ -1,0 +1,25 @@
+Testing adaptive integrators on known integrals:
+
+	Homework integrator:
+		Function = 1/sqrt(x), Exact = 2.000000E+000, Computed = 1.999962E+000, Error = 3.849992E-005
+
+	New integrator:
+		Function = 1/sqrt(x), Exact = 2.000000E+000, Computed = 1.999755E+000, Error = 2.454537E-004
+
+	Homework: 1/sqrt(x) integral passed! 
+
+
+	New: 1/sqrt(x) integral passed! 
+
+
+	Homework integrator:
+		Function = ln(x)/sqrt(x), Exact = -4.000000E+000, Computed = -3.999917E+000, Error = 8.294100E-005
+
+	New integrator:
+		Function = ln(x)/sqrt(x), Exact = -4.000000E+000, Computed = -3.999873E+000, Error = 1.266655E-004
+
+	Homework: ln(x)/sqrt(x) integral passed! 
+
+
+	New: ln(x)/sqrt(x) integral passed! 
+

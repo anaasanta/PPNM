@@ -1,0 +1,42 @@
+EXPLANATION OF THE EXERCISES:
+
+EXAM:
+        Implement a (one-dimensional) adaptive recursive integrator which at each iteration subdivides the interval 
+        not into two, but into three sub-intervals. Reuse points. Compare its effectiveness with the adaptive integrator 
+        from your homework.
+
+        For example, a rule like this (check that the numbers are correct),
+
+        xi={1/6,3/6,5/6} reusable points for division by 3;
+        wi={3/8,2/8,3/8} trapezium rule; (check this)
+        vi={1/3,1/3,1/3} rectangle rule; (check this)
+
+1. Check the values of wi and vi:
+
+    Following what is shown in the chapter of integration, we can find if the values of wi and vi are correct.
+
+    1) wi ( Trapezium rule, upper rule): As seen in section 1.3, we have 3 nodes in the interval [0,1]. Then, we can   
+    as base functions the polynomials of degree 0, 1, 2. 
+    - ϕ1(x) = 1, ϕ2(x) = x, ϕ3(x)=x^2       (Newton-Cotes)
+    On page 5, we can see we end up having:
+        Integral from 0 to 1 of ϕ1(x) = 1 = w1 + w2 + w3
+        Integral from 0 to 1 of ϕ2(x) = 1/2 = w1/6 + 3*w2/6 + 5*w3/6
+        Integral from 0 to 1 of ϕ3(x) = 1/3 = w1/36 + 9*w2/36 + 25*w3/36
+    
+    Solving the equations we get: w1 = 3/8, w2 = 2/8, w3 = 3/8
+
+    2) vi (rectangle rule, lower rule): The rectangle quadrature is the one found in (6)
+    Normally, ∆xi is taken as (b-a)/n and xi the center of each subinterval. 
+    Because we normalized [a,b] as [0,1] and n=3, v1=v2=v3 = 1/3
+
+
+2. First comparison of the adaptive integrators
+
+    The first thing I did is compare the adaptive integrator done for this exam with the one we did in exercise A of the 
+    homework, using two interesting integrals we treated before. 
+    As we can see on the results found in Out.txt, both integrators give similar values. However, the old integrator did on the 
+    homework gives better results. This can be because, even though dividing into 3 instead of 2 can give more flexibility 
+    in some cases, in these examples takes away a bit of the percision. 
+
+    Doing comparisons around the error function (plotting and comparing with tabulated values and caclulation of erf(1) with eps=0
+    and decreasing accuracy) we cannot see any significant difference between the two integrators.
