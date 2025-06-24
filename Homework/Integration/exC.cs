@@ -11,7 +11,7 @@ class exC
         {
             ("sqrt(x)",        x => Sqrt(x),         0.0, 1.0, 2.0/3.0),
             ("1/sqrt(x)",      x => 1.0/Sqrt(x),     0.0, 1.0, 2.0),
-            ("sqrt(1-x^2)",    x => Sqrt(1 - x*x),   0.0, 1.0, PI/2),
+            ("sqrt(1-x^2)",    x => Sqrt(1 - x*x),   0.0, 1.0, PI/4),
             ("ln(x)/sqrt(x)",  x => Log(x)/Sqrt(x),  0.0, 1.0, -4.0)
         };
 

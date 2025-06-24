@@ -6,8 +6,8 @@ sqrt(x) integral passed.
 Function = 1/sqrt(x). Exact = 2.000000E+000. Computed = 1.999962E+000. Error = 3.849992E-005
 1/sqrt(x) integral passed. 
 
-Function = sqrt(1-x^2). Exact = 1.570796E+000. Computed = 7.858125E-001. Error = 7.849838E-001
-Error: sqrt(1-x^2) integral failed! 
+Function = sqrt(1-x^2). Exact = 7.853982E-001. Computed = 7.858125E-001. Error = 4.143303E-004
+sqrt(1-x^2) integral passed. 
 
 Function = ln(x)/sqrt(x). Exact = -4.000000E+000. Computed = -3.999917E+000. Error = 8.294100E-005
 ln(x)/sqrt(x) integral passed. 
