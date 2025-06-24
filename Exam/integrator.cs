@@ -15,12 +15,16 @@ public class integrator
         {
             f2 = f(a + 2 * h / 6);
             f3 = f(a + 4 * h / 6);
+            ncalls += 2; // Count function calls
         } // first call, no points to reuse
 
         double f1 = f(a + h / 6), f4 = f(a + 5 * h / 6);
+        ncalls += 2; // Count function calls
         double Q = (2 * f1 + f2 + f3 + 2 * f4) / 6 * (b - a); // higher order rule
         double q = (f1 + f2 + f3 + f4) / 4 * (b - a); // lower order rule
+
         double err = Math.Abs(Q - q); // error estimate
+
         if (err <= acc + eps * Math.Abs(Q))
         {
             return Q;
@@ -33,7 +37,7 @@ public class integrator
 
 
     public static double erf(double z, double acc = 0.001, double eps = 0.001)
-    {
+    { // following the definition of the error function seen in the homework 
         if (z < 0)
         {
             return -erf(-z, acc, eps);
@@ -52,10 +56,11 @@ public class integrator
     public static double ClenshawCurtis(Func<double, double> f, double a, double b, double acc = 0.001, double eps = 0.001)
     {
         if (a >= b) throw new ArgumentException("Lower limit must be less than upper limit.");
+
         Func<double, double> g = theta =>
-        {
+        {// Change of variables to map [0, PI] to [a, b], following the definition on the homework
             double x = (a + b) / 2 + (b - a) / 2 * Cos(theta);
-            ncalls++;
+            ncalls++; // Count function calls
             return f(x) * Sin(theta) * (b - a) / 2;
         };
 
@@ -63,7 +68,7 @@ public class integrator
 
     }
 
-    // Integrator to accept infinite limits
+    // Integrator to accept infinite limits, same as in the homework but using the new ClenshawCurtis method
     public static double integrate_generalized(Func<double, double> f, double a, double b, double acc = 0.001, double eps = 0.001, double f2 = double.NaN, double f3 = double.NaN)
     { // This cases are found on page 12 
         if (!double.IsInfinity(a) && !double.IsInfinity(b))
@@ -74,12 +79,14 @@ public class integrator
         {
             // if lower limit is finite and upper limit is +infinity, we change variables 
             Func<double, double> g = x => f(a + (1 - x) / x) / (x * x);
+            ncalls++; // Count function calls
             return ClenshawCurtis(g, 0.0, 1.0, acc, eps);
         }
         else if (double.IsNegativeInfinity(a) && !double.IsInfinity(b))
         {
             // if lower limit is -infinity and upper limit is finite, we change variables 
             Func<double, double> g = x => f(b - (1 - x) / x) / (x * x);
+            ncalls++; // Count function calls
             return ClenshawCurtis(g, 0.0, 1.0, acc, eps);
         }
         else
@@ -100,9 +107,11 @@ public class integrator
         {
             ef2 = f(a + 2 * h / 6);
             ef3 = f(a + 4 * h / 6);
+            ncalls += 2; // Count function calls
         } // first call, no points to reuse
 
         double ef1 = f(a + h / 6), ef4 = f(a + 5 * h / 6);
+        ncalls += 2; // Count function calls
         double eQ = (2 * ef1 + ef2 + ef3 + 2 * ef4) / 6 * (b - a); // higher order rule
         double eq = (ef1 + ef2 + ef3 + ef4) / 4 * (b - a); // lower order rule
         double eerr = Math.Abs(eQ - eq); // error estimate

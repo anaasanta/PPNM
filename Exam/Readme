@@ -33,10 +33,87 @@ EXAM:
 2. First comparison of the adaptive integrators
 
     The first thing I did is compare the adaptive integrator done for this exam with the one we did in exercise A of the 
-    homework, using two interesting integrals we treated before. 
-    As we can see on the results found in Out.txt, both integrators give similar values. However, the old integrator did on the 
-    homework gives better results. This can be because, even though dividing into 3 instead of 2 can give more flexibility 
-    in some cases, in these examples takes away a bit of the percision. 
+    homework, using some interesting integrals we treated before. 
+    As we can see on the results found in Out.txt, both integrators give similar values. However, the old integrator done on the 
+    homework gives better results, with the exception of the integral of Sqrt(1-x^2), which we'll talk about later. (point 3)
+    This can be because, even though dividing into 3 instead of 2 can give more flexibility in some cases, in these examples takes
+    away a bit of the precision.
+    In relation to the number of function calls, the new integrator cuts down the number of function calls in all cases, compared to the
+    2-subinterval integrator from the homework (from 16 to 15 for √x, from 16 to 15 for √(1–x²), etc.).
+    The biggest difference we can see its in the integrals with an endpoint singularity, where the new integrator significantly reduces the number of
+    function calls (e.g. 1/√x dropped from 8572 calls to 201, and ln(x)/√x from 8604 to 393).
 
-    Doing comparisons around the error function (plotting and comparing with tabulated values and caclulation of erf(1) with eps=0
-    and decreasing accuracy) we cannot see any significant difference between the two integrators.
+    After this, I decided to time the two integrators on the same examples, and we can see that the new integrator is
+    significantly faster than the old one, which is expected since it has to do less function calls. 
+
+    Doing comparisons around the error function (plotting and comparing with tabulated values) we cannot see any significant difference 
+    between the two integrators.
+    After, I added again the timing of the two integrators when comparing with the tabulated values. We can see that, at the beggining,
+    the new integrator is faster, but after the times start to be really similar (the error function is erf.svg the timings are erf_time.svg).
+
+3. Second comparison of adaptive integrators 
+
+    The second comparison I did is between the Clenshaw-Curtis change of variables applied to the adaptive integrator
+    done for this exam and the one we did in exercise B of the homework.
+    Compared to the homework adaptive integrator, our three-subinterval method benefits similarly from the Clenshaw–Curtis 
+    change of variables. For both tests, Clenshaw-Curtis evaluated on the homework integrator gives the lowest error per
+    function call, while C-C on the new 3-subinterval integrator achieves similar accuracy results with fewer integrand
+    evaluations on 1/Sqrt(x) (18 vs 132) and 192 vs 150 on ln(x)/Sqrt(x).
+    Meaning, comparing Cleanshaw-Curtis between the two integrators, the homework version remains giving less erros, 
+    though the new integrator narrows the gap when singular endpoints are present and, comparing timings, the new integrator 
+    is faster in all cases. 
+
+    Now, comparing the original adaptive recursive integrator with 3 subdivisions with the Clenshaw-Curtis change of variables,
+    we can see that using the change of variables gives less integrand evaluations in all cases, except for the integral of 
+    Sqrt(1-x^2). C-C gives less error, but mostly takes a bit more time to compute.     
+
+    After seeing how the new adaptive integrator performs with the Clenshaw-Curtis change of variables, I also tried a new integral:
+    (Sqrt(1-x^2) from -1 to 1), the only case where the a is not 0. As we can see by representing the function, it is exactly an upper
+    half circle, so the integral should be equal to pi/2. Then, the transformation is suited to a cosine transformation. 
+    Then, the homework integrator just needs 16 functions calls, but the new integrator needs a lot more subdivisions (78 calls). comparing
+    the new Cleanshaw-Curtis integrator with the new adaptive recursive integrator of 3 subdivisions, we can observe that the second one takes
+    less function calls (39 vs 78), but the first continues giving a better error. 
+
+    On f_counts_cc.svg, we can see the different integrand counts for the  C-C on the homework integrator,
+    C-C on the new integrator, and the new adaptive recursive integrator with 3 subdivisions; which are the ones we're most interested in.
+
+4. Third comparison of adaptive integrators
+
+    For the third comparison, following what we did in exercise B of the homework, we worked with three infinite-limite integrals. 
+    The new (three-subinterval) adaptive integrator consistently reduces the number of function calls compared to the homework integrators
+    (2 subintervals): 79 vs 105 for exp(x), 55 vs 121 for x*exp(-x), and 134 vs 162 for exp(-x^2). 
+    However, we can see two places where the homework integrator gives better results:
+    - for exp(x) and x*exp(-x), the errors are larger than the homework integrator ones. 
+    In the case of the Gaussian integral(exp(-x^2)), the new method is better in accuracy and gives less calls, which in total makes for a 
+    better method in this case. 
+    In conclusion, the new adaptive recursive integrator offers a "faster" in a sense alternative, but with a cost, except in the symmetric 
+    cases like the Gaussian it seems. 
+
+    After this last conclusion, I tried a new integral: (1/(1+x^2) from -inf to inf)
+    By representing the function, we can see that it is a symmetric function. 
+    The new adaptive integrator handles this case more efficiently, achieving a smaller error than the homework one in 110 calls, compared to 
+    the homework integrator which takes 162 calls and a higher error. 
+    With this, we can say that for symmetric infinite integrals, the new method is better than the 2-subinterval adaptive recursive integrator. 
+
+5. Fourth comparison of adaptive integrators
+
+    The last comparison I did is between the adaptive integrator done for this exam and the one we did in exercise C of the 
+    homework.
+    Here, we can see that the homework integrator's error estimate is always safely above the true error, while the new three-subinterval can 
+    be too optimistic on sharp singularities. We can see it underestimates the error for ln(x)/Sqrt(x).
+    For singular functions like ln(x)/Sqrt(x), the actual error is larger than the estimate, meaning that the estimator is overly optimistic and
+    underestimates the error in sensitive cases.
+    In conclusion, the homework integrator seems more reliable in terms of error estimation in these examples.
+    The visual comparison is in integrator_error.svg. 
+
+
+6. Try calculate 'erf(1)' with the maximum precision that your integrator can do.
+
+    For this, I used the adaptive integrator done for this exam, and lowered the value of accuracy in every loop. 
+    If the value obtained from this accuracy is better than the previous one, I save it.
+    On erf1.svg I plotted (in log-log scale) the absolute value of the difference between the result and the exact result as a function of acc.
+    In Out.txt we can see what this accuracy and value is. 
+
+
+
+

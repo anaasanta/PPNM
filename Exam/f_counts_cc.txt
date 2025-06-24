@@ -1,0 +1,4 @@
+Number	Function	CC (Homework)	Integrator (Homework)	CC (New)	Adaptive3 (New)
+1	1/sqrt(x)	32	8572	18	201
+2	ln(x)/sqrt(x)	192	8604	150	393
+3	Sqrt(1-x^2)	16	40	78	39
