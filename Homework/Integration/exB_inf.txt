@@ -1,8 +1,8 @@
 Test of infinite-limit integrals with integrate_generalized
 
-exp(x):	 Generalized integrator value:2.71838145E+000	 Exact value:2.71828183E+000	 Error:9.96E-005	 Number of calls:52
+exp(x):	 Generalized integrator value:2.71838145E+000	 Exact value:2.71828183E+000	 Error:9.96E-005	 Number of calls:104
 
-x*exp(-x):	 Generalized integrator value:9.99961439E-001	 Exact value:1.00000000E+000	 Error:3.86E-005	 Number of calls:60
+x*exp(-x):	 Generalized integrator value:9.99961439E-001	 Exact value:1.00000000E+000	 Error:3.86E-005	 Number of calls:120
 
-exp(-x^2):	 Generalized integrator value:1.77178873E+000	 Exact value:1.77245385E+000	 Error:6.65E-004	 Number of calls:80
+exp(-x^2):	 Generalized integrator value:1.77178873E+000	 Exact value:1.77245385E+000	 Error:6.65E-004	 Number of calls:160
 

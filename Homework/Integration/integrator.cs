@@ -15,9 +15,12 @@ public class integrator
         {
             f2 = f(a + 2 * h / 6);
             f3 = f(a + 4 * h / 6);
+            ncalls += 2; // Count function calls
+
         } // first call, no points to reuse
 
         double f1 = f(a + h / 6), f4 = f(a + 5 * h / 6);
+        ncalls += 2; // Count function calls
         double Q = (2 * f1 + f2 + f3 + 2 * f4) / 6 * (b - a); // higher order rule
         double q = (f1 + f2 + f3 + f4) / 4 * (b - a); // lower order rule
         double err = Math.Abs(Q - q); // error estimate
