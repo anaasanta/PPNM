@@ -27,6 +27,7 @@ class exA
             var b = test.b;
             var exact = test.exact;
             double val = integrator.integrate(f, a, b);
+            integrator.ncalls = 0; // Reset function call counter
             WriteLine($"Function = {name}, Exact = {exact:E}, Computed = {val:E}, Error = {Abs(val - exact):E}");
 
             // Check that integrator returns results within the given accuracy goals.

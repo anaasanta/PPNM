@@ -22,10 +22,12 @@ class exB
             var b = test.b;
             var exact = test.exact; // exact value 
             double val = integrator.ClenshawCurtis(f, a, b); //value witht the Clenshaw-Curtis method
+            int calls = integrator.ncalls; // number of function calls
+            integrator.ncalls = 0; // Reset function call counter for next test
             double val2 = integrator.integrate(f, a, b); //value with the ordinary integrator, without variable transformation 
 
             WriteLine($"Function = {name}, Exact = {exact:E}");
-            WriteLine($"\t\tComputed with Clenshaw-Curtis= {val:E}, Function calls = {integrator.ncalls}, Error = {Abs(val - exact):E}");
+            WriteLine($"\t\tComputed with Clenshaw-Curtis= {val:E}, Function calls = {calls}, Error = {Abs(val - exact):E}");
             WriteLine($"\t\tComputed with ordinary integrator= {val2:E}, Error with exact value = {Abs(val2 - exact):E}, Error with Clenshaw-Curtis = {Abs(val2 - val):E}");
             integrator.ncalls = 0; // reset call count for next test
 
@@ -54,6 +56,7 @@ class exB
                 integrator.ncalls = 0;
                 double val = integrator.integrate_generalized(test.f, test.a, test.b);
                 int calls = integrator.ncalls;
+                integrator.ncalls = 0; // Reset function call counter for next test
                 double err = Abs(val - test.exact);
                 file.WriteLine($"{test.name}:\t Generalized integrator value:{val:E8}\t Exact value:{test.exact:E8}\t Error:{err:E2}\t Number of calls:{calls}\n");
             }
