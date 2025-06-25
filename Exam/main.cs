@@ -74,7 +74,7 @@ class main
         double[] zs = { -3.0, -2.0, -1.0, -0.5, 0.0, 0.5, 1.0, 1.5, 2.0, 3.0 };
         double[] exactErfs = { -0.9999779095030014, -0.9953222650189527, -0.84270079294971486934, -0.5204998778130465, 0.0, 0.5204998778130465, 0.84270079294971486934, 0.9661051464753108, 0.9953222650189527, 0.9999779095030014 };
 
-        using (var file = new StreamWriter("erf.txt"))
+        using (var file = new StreamWriter("out_erf.txt"))
         {
             file.WriteLine("x=z\terf value (Homework)\tTime Homework (ms)\terf value (New)\tTime New (ms)\tExact erf value\t Difference  Homework\tDifference New");
             for (int i = 0; i < zs.Length; i++)
@@ -104,7 +104,7 @@ class main
 
 
         // 3. Now we will compare the Clenshaw-Curtis integrator we implemented in the homework with the new one
-        using (var file = new System.IO.StreamWriter("f_counts_cc.txt", false))
+        using (var file = new System.IO.StreamWriter("out_f_counts_cc.txt", false))
         {
             file.WriteLine("Number\tFunction\tCC (Homework)\tIntegrator (Homework)\tCC (New)\tAdaptive3 (New)");
         }
@@ -158,9 +158,9 @@ class main
             WriteLine($"\t\tComputed with adaptive3 new = {val4:E}, Calls = {calls4}, Error = {Abs(val4 - exact):E}, Time = {t4:F5} ms");
 
             // We write all function calls to a file for later analysis
-            using (var writer = new System.IO.StreamWriter("f_counts_cc.txt", true))
+            using (var file = new System.IO.StreamWriter("out_f_counts_cc.txt", true))
             {
-                writer.WriteLine("{0}\t{1}\t{2}\t{3}\t{4}\t{5}",
+                file.WriteLine("{0}\t{1}\t{2}\t{3}\t{4}\t{5}",
                     index + 1, // index starts from 1
                     name,
                     calls,
@@ -213,7 +213,7 @@ class main
         WriteLine($"\n========================== TEST INTEGRATOR ERROR ESTIMATION ============================= \n");
         WriteLine($"\n\nName\tcomputed (Homework) \ttest_err (Homework) \tactual_err (Homework) \tcomputed (New) \ttest_err (New) \tactual_err (New) \t calls (Homework) \t calls (New)\n");
 
-        using (var file = new StreamWriter("integrator_error.txt"))
+        using (var file = new StreamWriter("out_integrator_error.txt"))
         {
             file.WriteLine("Number\tTest Error (Homework)\tActual Error (Homework)\tTest Error (New)\tActual Error (New)");
         }
@@ -225,9 +225,9 @@ class main
             double actual_err3 = Abs(Q3 - test.exact);
             WriteLine($"{test.name}\t\t{Q:E8}\t\t{err_est:E2}\t\t\t{actual_err:E2}\t\t\t{Q3:E8}\t\t{err_est3:E2}\t\t{actual_err3:E2}\t\t{integrator.ncalls}\t\t{integrator_3.ncalls}");
 
-            using (var writer = new System.IO.StreamWriter("integrator_error.txt", true))
+            using (var file = new System.IO.StreamWriter("out_integrator_error.txt", true))
             {
-                writer.WriteLine("{0}\t{1:E}\t{2:E}\t{3:E}\t{4:E}",
+                file.WriteLine("{0}\t{1:E}\t{2:E}\t{3:E}\t{4:E}",
                     Array.IndexOf(tests, test) + 1, // index starts from 1
                     err_est,
                     actual_err,
@@ -242,7 +242,7 @@ class main
 
 
         // 6. Try calculate 'erf(1)' with the maximum precision that the new integrator can do.
-        using (var file = new StreamWriter("erf1.txt"))
+        using (var file = new StreamWriter("out_erf1.txt"))
         {
             double z1 = 1.0;
             double exactErf1 = 0.84270079294971486934;

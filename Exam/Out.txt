@@ -1,78 +1,78 @@
 ================= TEST INTEGRATOR WITH INTERESTING INTEGRALS =================
 
-	Homework integrator:
-		Function = sqrt(x), Exact = 6.666667E-001, Computed = 6.669539E-001, Error = 2.872424E-004, Time = 0.31930 ms
-			Number of function calls = 16
+Homework integrator:
+Function = sqrt(x), Exact = 6.666667E-001, Computed = 6.669539E-001, Error = 2.872424E-004, Time = 0.41590 ms
+Number of function calls = 16
 
-	New integrator:
-		Function = sqrt(x), Exact = 6.666667E-001, Computed = 6.668804E-001, Error = 2.137054E-004, Time = 0.13770 ms
-			Number of function calls = 15
+New integrator:
+Function = sqrt(x), Exact = 6.666667E-001, Computed = 6.668804E-001, Error = 2.137054E-004, Time = 0.16370 ms
+Number of function calls = 15
 
-		Homework: sqrt(x) integral passed! 
-
-
-		New: sqrt(x) integral passed! 
+Homework: sqrt(x) integral passed! 
 
 
-	Homework integrator:
-		Function = 1/sqrt(x), Exact = 2.000000E+000, Computed = 1.999962E+000, Error = 3.849992E-005, Time = 0.31270 ms
-			Number of function calls = 8572
-
-	New integrator:
-		Function = 1/sqrt(x), Exact = 2.000000E+000, Computed = 1.999755E+000, Error = 2.454537E-004, Time = 0.00280 ms
-			Number of function calls = 201
-
-		Homework: 1/sqrt(x) integral passed! 
+New: sqrt(x) integral passed! 
 
 
-		New: 1/sqrt(x) integral passed! 
+Homework integrator:
+Function = 1/sqrt(x), Exact = 2.000000E+000, Computed = 1.999962E+000, Error = 3.849992E-005, Time = 0.30970 ms
+Number of function calls = 8572
+
+New integrator:
+Function = 1/sqrt(x), Exact = 2.000000E+000, Computed = 1.999755E+000, Error = 2.454537E-004, Time = 0.00280 ms
+Number of function calls = 201
+
+Homework: 1/sqrt(x) integral passed! 
 
 
-	Homework integrator:
-		Function = sqrt(1-x^2), Exact = 7.853982E-001, Computed = 7.858125E-001, Error = 4.143303E-004, Time = 0.02900 ms
-			Number of function calls = 16
-
-	New integrator:
-		Function = sqrt(1-x^2), Exact = 7.853982E-001, Computed = 7.857031E-001, Error = 3.049512E-004, Time = 0.00040 ms
-			Number of function calls = 15
-
-		Homework: sqrt(1-x^2) integral passed! 
+New: 1/sqrt(x) integral passed! 
 
 
-		New: sqrt(1-x^2) integral passed! 
+Homework integrator:
+Function = sqrt(1-x^2), Exact = 7.853982E-001, Computed = 7.858125E-001, Error = 4.143303E-004, Time = 0.02920 ms
+Number of function calls = 16
+
+New integrator:
+Function = sqrt(1-x^2), Exact = 7.853982E-001, Computed = 7.857031E-001, Error = 3.049512E-004, Time = 0.00040 ms
+Number of function calls = 15
+
+Homework: sqrt(1-x^2) integral passed! 
 
 
-	Homework integrator:
-		Function = ln(x)/sqrt(x), Exact = -4.000000E+000, Computed = -3.999917E+000, Error = 8.294100E-005, Time = 0.43400 ms
-			Number of function calls = 8604
-
-	New integrator:
-		Function = ln(x)/sqrt(x), Exact = -4.000000E+000, Computed = -3.999873E+000, Error = 1.266655E-004, Time = 0.00830 ms
-			Number of function calls = 393
-
-		Homework: ln(x)/sqrt(x) integral passed! 
+New: sqrt(1-x^2) integral passed! 
 
 
-		New: ln(x)/sqrt(x) integral passed! 
+Homework integrator:
+Function = ln(x)/sqrt(x), Exact = -4.000000E+000, Computed = -3.999917E+000, Error = 8.294100E-005, Time = 0.63450 ms
+Number of function calls = 8604
+
+New integrator:
+Function = ln(x)/sqrt(x), Exact = -4.000000E+000, Computed = -3.999873E+000, Error = 1.266655E-004, Time = 0.00880 ms
+Number of function calls = 393
+
+Homework: ln(x)/sqrt(x) integral passed! 
+
+
+New: ln(x)/sqrt(x) integral passed! 
 
 
 ========================== CLENSHAW-CURTIS ================================= 
 
-	Function = 1/sqrt(x), Exact = 2.000000E+000
-		Computed with CC homework   = 1.999992E+000, Calls = 32,  Error = 7.989536E-006, Time = 0.15760 ms
-		Computed with integrate home = 1.999962E+000, Calls = 8572, Error = 3.849992E-005, Time = 0.18300 ms
-		Computed with CC new        = 1.999980E+000, Calls = 18, Error = 2.046236E-005, Time = 0.11410 ms
-		Computed with adaptive3 new = 1.999755E+000, Calls = 201, Error = 2.454537E-004, Time = 0.00350 ms
-	Function = ln(x)/sqrt(x), Exact = -4.000000E+000
-		Computed with CC homework   = -3.999874E+000, Calls = 192,  Error = 1.261435E-004, Time = 0.04910 ms
-		Computed with integrate home = -3.999917E+000, Calls = 8604, Error = 8.294100E-005, Time = 0.36410 ms
-		Computed with CC new        = -3.999881E+000, Calls = 150, Error = 1.187687E-004, Time = 0.05430 ms
-		Computed with adaptive3 new = -3.999873E+000, Calls = 393, Error = 1.266655E-004, Time = 0.05230 ms
-	Function = Sqrt(1-x^2), Exact = 1.570796E+000
-		Computed with CC homework   = 1.570796E+000, Calls = 16,  Error = 2.220446E-016, Time = 0.03780 ms
-		Computed with integrate home = 1.571138E+000, Calls = 40, Error = 3.414952E-004, Time = 0.00080 ms
-		Computed with CC new        = 1.570786E+000, Calls = 78, Error = 1.033065E-005, Time = 0.00410 ms
-		Computed with adaptive3 new = 1.571128E+000, Calls = 39, Error = 3.314561E-004, Time = 0.00080 ms
+Function = 1/sqrt(x), Exact = 2.000000E+000
+Computed with CC homework   = 1.999992E+000, Calls = 32,  Error = 7.989536E-006, Time = 0.19640 ms
+Computed with integrate home = 1.999962E+000, Calls = 8572, Error = 3.849992E-005, Time = 0.20770 ms
+Computed with CC new        = 1.999980E+000, Calls = 18, Error = 2.046236E-005, Time = 0.14200 ms
+Computed with adaptive3 new = 1.999755E+000, Calls = 201, Error = 2.454537E-004, Time = 0.00400 ms
+Function = ln(x)/sqrt(x), Exact = -4.000000E+000
+Computed with CC homework   = -3.999874E+000, Calls = 192,  Error = 1.261435E-004, Time = 0.06290 ms
+Computed with integrate home = -3.999917E+000, Calls = 8604, Error = 8.294100E-005, Time = 0.31650 ms
+Computed with CC new        = -3.999881E+000, Calls = 150, Error = 1.187687E-004, Time = 0.00860 ms
+Computed with adaptive3 new = -3.999873E+000, Calls = 393, Error = 1.266655E-004, Time = 0.00850 ms
+Function = Sqrt(1-x^2), Exact = 1.570796E+000
+Computed with CC homework   = 1.570796E+000, Calls = 16,  Error = 2.220446E-016, Time = 0.20520 ms
+Computed with integrate home = 1.571138E+000, Calls = 40, Error = 3.414952E-004, Time = 0.00130 ms
+Computed with CC new        = 1.570786E+000, Calls = 78, Error = 1.033065E-005, Time = 0.00430 ms
+Computed with adaptive3 new = 1.571128E+000, Calls = 39, Error = 3.314561E-004, Time = 0.00100 ms
 
 ========================== GENERALIZED INTEGRATOR, INFINITE LIMIT INTEGRALS ============================= 
 
@@ -80,35 +80,35 @@ Test of infinite-limit integrals with integrate_generalized
 
 Homework:
 
-	exp(x):	 Generalized integrator value:2.71838145E+000	 Exact value:2.71828183E+000	 Error:9.96E-005	 Number of calls:105
+exp(x):	 Generalized integrator value:2.71838145E+000	 Exact value:2.71828183E+000	 Error:9.96E-005	 Number of calls:105
 
 New:
 
-	exp(x):	 Generalized integrator value:2.71871450E+000	 Exact value:2.71828183E+000	 Error:4.33E-004	 Number of calls:79
+exp(x):	 Generalized integrator value:2.71871450E+000	 Exact value:2.71828183E+000	 Error:4.33E-004	 Number of calls:79
 
 Homework:
 
-	x*exp(-x):	 Generalized integrator value:9.99961439E-001	 Exact value:1.00000000E+000	 Error:3.86E-005	 Number of calls:121
+x*exp(-x):	 Generalized integrator value:9.99961439E-001	 Exact value:1.00000000E+000	 Error:3.86E-005	 Number of calls:121
 
 New:
 
-	x*exp(-x):	 Generalized integrator value:1.01161026E+000	 Exact value:1.00000000E+000	 Error:1.16E-002	 Number of calls:55
+x*exp(-x):	 Generalized integrator value:1.01161026E+000	 Exact value:1.00000000E+000	 Error:1.16E-002	 Number of calls:55
 
 Homework:
 
-	exp(-x^2):	 Generalized integrator value:1.77178873E+000	 Exact value:1.77245385E+000	 Error:6.65E-004	 Number of calls:162
+exp(-x^2):	 Generalized integrator value:1.77178873E+000	 Exact value:1.77245385E+000	 Error:6.65E-004	 Number of calls:162
 
 New:
 
-	exp(-x^2):	 Generalized integrator value:1.77252412E+000	 Exact value:1.77245385E+000	 Error:7.03E-005	 Number of calls:134
+exp(-x^2):	 Generalized integrator value:1.77252412E+000	 Exact value:1.77245385E+000	 Error:7.03E-005	 Number of calls:134
 
 Homework:
 
-	1/(1+x^2):	 Generalized integrator value:3.14171567E+000	 Exact value:3.14159265E+000	 Error:1.23E-004	 Number of calls:162
+1/(1+x^2):	 Generalized integrator value:3.14171567E+000	 Exact value:3.14159265E+000	 Error:1.23E-004	 Number of calls:162
 
 New:
 
-	1/(1+x^2):	 Generalized integrator value:3.14160045E+000	 Exact value:3.14159265E+000	 Error:7.80E-006	 Number of calls:110
+1/(1+x^2):	 Generalized integrator value:3.14160045E+000	 Exact value:3.14159265E+000	 Error:7.80E-006	 Number of calls:110
 
 
 ========================== TEST INTEGRATOR ERROR ESTIMATION ============================= 
