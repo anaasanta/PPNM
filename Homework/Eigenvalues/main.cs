@@ -7,7 +7,7 @@ class main
     static int Main(string[] args)
     {
         /*
-        Check that your "jacobi.cs" works as intended:
+        EXERCISE A
 
             1. generate a random symmetric matrix A
             2. apply your routine to perform the eigenvalue-decomposition

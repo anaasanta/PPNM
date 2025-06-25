@@ -52,14 +52,14 @@ class exerciseB
 
         if (mode == "dr")
         {
-            using (StreamWriter file = new StreamWriter("convergence_dr.txt", append: true))
+            using (StreamWriter file = new StreamWriter("out_convergence_dr.txt", append: true))
             {
                 file.WriteLine($"{dr}, {eigenval[0]}");
             }
         }
         else if (mode == "rmax")
         {
-            using (StreamWriter file = new StreamWriter("convergence_rmax.txt", append: true))
+            using (StreamWriter file = new StreamWriter("out_convergence_rmax.txt", append: true))
             {
                 file.WriteLine($"{rmax}, {eigenval[0]}");
             }
@@ -76,7 +76,7 @@ class exerciseB
         */
         else if (mode == "wavefunction")
         {
-            using (StreamWriter file = new StreamWriter("wavefunction.txt", append: true))
+            using (StreamWriter file = new StreamWriter("out_wavefunction.txt", append: true))
             {
 
                 for (int i = 0; i < npoints; i++)
