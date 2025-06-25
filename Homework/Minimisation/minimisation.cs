@@ -123,7 +123,7 @@ public static class minimisation
         // diagonal terms
         for (int j = 0; j < n; j++)
         {
-            h[j] = (1 + Abs(x[j])) * Pow(2.0, -13);
+            h[j] = (1 + Abs(x[j])) * Pow(2.0, -26);
             x[j] += h[j];
             fplus[j] = phi(x);
             x[j] -= 2 * h[j];
