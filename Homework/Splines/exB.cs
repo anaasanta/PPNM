@@ -121,8 +121,14 @@ public class qspline
 
     public static int Main(string[] args)
     {
+        /*
+        We consider the following {xi,yi} table:
+        {xi=0,1,…,9; yi=sin(xi)}.
+        */
+
         vector x = new vector(10);
         vector y = new vector(10);
+
         for (int i = 0; i < 10; i++)
         {
             x[i] = i;

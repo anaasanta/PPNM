@@ -73,14 +73,18 @@ class exA
 
     static int Main(string[] args)
     {
-        
+        // we will take the table {xi=0,1,…,9; yi=cos(xi)}, and plot its linear interpolant together with the
+        // interpolant's antiderivative  
+
         vector x = new vector(10);
         vector y = new vector(10);
+
         for (int i = 0; i < 10; i++)
         {
             x[i] = i;
             y[i] = Cos(i);
         }
+
         double linz, integz;
         for (double z = x[0]; z <= x[x.size - 1]; z += 1.0 / 10)
         {

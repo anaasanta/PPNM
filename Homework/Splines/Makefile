@@ -1,14 +1,14 @@
-exA.txt: Makefile exA.exe
-	mono exA.exe > exA.txt
-	sed -i 's/,/./g' exA.txt
+Out_exA.txt: Makefile exA.exe
+	mono exA.exe > Out_exA.txt
+	sed -i 's/,/./g' Out_exA.txt
 
-exB.txt: Makefile exB.exe
-	mono exB.exe > exB.txt
-	sed -i 's/,/./g' exB.txt
+Out_exB.txt: Makefile exB.exe
+	mono exB.exe > Out_exB.txt
+	sed -i 's/,/./g' Out_exB.txt
 
-exC.txt: Makefile exC.exe
-	mono exC.exe > exC.txt
-	sed -i 's/,/./g' exC.txt
+Out_exC.txt: Makefile exC.exe
+	mono exC.exe > Out_exC.txt
+	sed -i 's/,/./g' Out_exC.txt
 
 exA.exe: exA.cs vector.dll
 	mcs -target:exe -out:exA.exe -reference:vector.dll exA.cs
@@ -22,7 +22,7 @@ exC.exe: exC.cs vector.dll
 vector.dll: vector.cs
 	mcs -target:library -out:vector.dll vector.cs
 
-exA.svg: exA.txt
+exA.svg: Out_exA.txt
 	echo " \
 		set terminal svg; \
 		set output 'exA.svg'; \
@@ -36,7 +36,7 @@ exA.svg: exA.txt
 			 '$<' using 1:3 with lines title 'Anti-derivative' lc 'blue'\
 	" | gnuplot
 
-exB.svg: exB.txt
+exB.svg: Out_exB.txt
 	echo " \
 		set terminal svg; \
 		set output 'exB.svg'; \
@@ -50,7 +50,7 @@ exB.svg: exB.txt
 			 '$<' using 1:4 with lines title 'Anti-Derivative' lc 'red' \
 	" | gnuplot
 
-exC.svg: exC.txt
+exC.svg: Out_exC.txt
 	echo " \
 		set terminal svg; \
 		set output 'exC.svg'; \
