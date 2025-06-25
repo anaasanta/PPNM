@@ -58,13 +58,13 @@ public class exB
     public static int Main(string[] args)
     {
         // 1) Newtonian circular: eps=0, u'(0)=0 (PASO FIJO)
-        calculate_fixed("exB_circular.txt", 0.0, 1.0, 0.0);
+        calculate_fixed("out_exB_circular.txt", 0.0, 1.0, 0.0);
 
         // 2) Newtonian elliptical: eps=0, u'(0)=-0.5 (DRIVER)
-        calculate("exB_ellipse.txt", 0.0, 1.0, -0.5);
+        calculate("out_exB_ellipse.txt", 0.0, 1.0, -0.5);
 
         // 3) Relativistic precession: eps=0.01, u'(0)=-0.5 (DRIVER)
-        calculate("exB_precession.txt", 0.01, 1.0, -0.5);
+        calculate("out_exB_precession.txt", 0.01, 1.0, -0.5);
 
         return 0;
     }

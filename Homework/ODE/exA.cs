@@ -40,9 +40,8 @@ class exA
         double a = 0; // start point
         double b = 10; // end point
         var (xlist, ylist) = solveODE.driver(f, (a, b), yinit);
-        // print the results
 
-        using (StreamWriter file = new StreamWriter("exA.txt"))
+        using (StreamWriter file = new StreamWriter("out_exA.txt"))
         {
             for (int i = 0; i < xlist.Count; i++)
             {
@@ -60,7 +59,7 @@ class exA
 
         var (ts, ys) = solveODE.driver(exOscillator, (t0, t1), y0);
 
-        using (StreamWriter file = new StreamWriter("exA_oscillator.txt"))
+        using (StreamWriter file = new StreamWriter("out_exA_oscillator.txt"))
         {
             for (int i = 0; i < ts.Count; i++)
             {
