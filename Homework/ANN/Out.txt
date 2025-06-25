@@ -1,0 +1,2 @@
+Training completed in 265 iterations with final cost: 0.0170555043142933
+Training completed in 144 iterations with final cost: 0.000131586306441847
