@@ -8,9 +8,9 @@ public static class LeastSquares
     public static int Main()
     {
 
-        double[] time = { 1, 2, 3, 4, 6, 9, 10, 13, 15 };
-        double[] activity = { 117, 100, 88, 72, 53, 29.5, 25.2, 15.2, 11.1 };
-        double[] deltay = { 6, 5, 4, 4, 4, 3, 3, 2, 2 };
+        double[] time = { 1, 2, 3, 4, 6, 9, 10, 13, 15 };  // Time in days
+        double[] activity = { 117, 100, 88, 72, 53, 29.5, 25.2, 15.2, 11.1 }; // Activity y of ThX in relative units
+        double[] deltay = { 6, 5, 4, 4, 4, 3, 3, 2, 2 }; // Uncertainties dy of the activity
 
         vector x = new vector(time);
         vector y = new vector(activity);
@@ -18,13 +18,14 @@ public static class LeastSquares
 
         vector Y = new vector(x.size);
         vector dY = new vector(x.size);
+
         for (int i = 0; i < x.size; i++)
         {
-            Y[i] = Log(y[i]);
-            dY[i] = dy[i] / y[i];
+            Y[i] = Log(y[i]);  // Logarithm of the activity
+            dY[i] = dy[i] / y[i]; // Uncertainty of the logarithm: dy/y
         }
 
-        Func<double, double>[] fs = { t => 1.0, t => -t };
+        Func<double, double>[] fs = { t => 1.0, t => -t }; // Functions for the linear fit: f(t) = a * exp(-λt) -> ln(f(t)) = ln(a) - λt
         (vector c, matrix cov) = lsfit(fs, x, Y, dY);
 
         double ln_a = c[0];
@@ -42,17 +43,17 @@ public static class LeastSquares
         WriteLine($"δλ = {delta_lambda}");
         WriteLine($"δT₁/₂ = {delta_halfLife}");
 
-        using (StreamWriter file = new StreamWriter("exA_data.txt"))
+        using (StreamWriter file = new StreamWriter("out_exA_data.txt"))
         {
-            file.WriteLine($"----- t  y  dy");
+            file.WriteLine($"----- t  y  dy halflife");
             for (int i = 0; i < x.size; i++)
             {
-                file.WriteLine($"{x[i]} {y[i]} {dy[i]}");
+                file.WriteLine($"{x[i]} {y[i]} {dy[i]} {halfLife}");
             }
         }
 
-        // Gnerate file with the fit curve
-        using (StreamWriter file = new StreamWriter("exA_fit.txt"))
+        // Generate file with the fit curve
+        using (StreamWriter file = new StreamWriter("out_exA_fit.txt"))
         {
             file.WriteLine($"------- t  y_fit");
             for (int i = 0; i < x.size; i++)
@@ -65,7 +66,7 @@ public static class LeastSquares
         return 0;
     }
 
-
+    //LSFIT FROM EXERCISE B
     public static (vector, matrix) lsfit(Func<double, double>[] fs, vector x, vector y, vector dy)
     { // In this one, we also calculate the covariance matrix and the uncertanties of the fitting coefficients
         int n = x.size;
@@ -92,6 +93,7 @@ public static class LeastSquares
 
     }
 
+
     /* //LSFIT FROM EXERCISE A
     public static vector lsfit(Func<double, double>[] fs, vector x, vector y, vector dy)
     {
@@ -112,4 +114,5 @@ public static class LeastSquares
         return c;
     }
     */
+
 }

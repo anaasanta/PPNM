@@ -28,7 +28,7 @@ public static class exC
 
 
         Func<double, double>[] fs = { t => 1.0, t => -t };
-        (vector c, matrix cov) = lsfit(fs, x, Y, dY);
+        (vector c, matrix cov) = LeastSquares.lsfit(fs, x, Y, dY);
 
         double ln_a = c[0];
         double lambda = c[1];
@@ -48,7 +48,7 @@ public static class exC
         // F_+(x) = (c0+δc0) + (c1+δc1)*x,
         // F_-(x) = (c0-δc0) + (c1-δc1)*x.
 
-        using (StreamWriter file = new StreamWriter("exC_fits.txt"))
+        using (StreamWriter file = new StreamWriter("out_exC_fits.txt"))
         {
             file.WriteLine("----- t   F_best   F_+  F_-");
             for (int i = 0; i < x.size; i++)
@@ -66,29 +66,5 @@ public static class exC
         return 0;
     }
 
-    public static (vector, matrix) lsfit(Func<double, double>[] fs, vector x, vector y, vector dy)
-    { // In this one, we also calculate the covariance matrix and the uncertanties of the fitting coefficients
-        int n = x.size;
-        int m = fs.Length;
-        matrix A = new matrix(n, m);
-        vector b = new vector(n);
-        for (int i = 0; i < n; i++)
-        {
-            b[i] = y[i] / dy[i];
-            for (int k = 0; k < m; k++)
-            {
-                A[i, k] = fs[k](x[i]) / dy[i];
-            }
-        }
-        var (Q, R) = QRGS.decomp(A);
-        vector c = QRGS.solve(Q, R, b);
 
-        matrix Atrans = A.T;
-        matrix AT = Atrans * A;
-        (matrix QAT, matrix RAT) = QRGS.decomp(AT);
-        matrix cov = QRGS.inverse(QAT, RAT);
-
-        return (c, cov);
-
-    }
 }
