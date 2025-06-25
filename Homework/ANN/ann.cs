@@ -114,7 +114,10 @@ public class ann
         this.xs = x.copy();
         this.ys = y.copy();
 
+
         Func<vector, double> phi = p => cost(p); // cost function
+
+        WriteLine($"Initial cost: {cost(p)}"); // print initial cost
         // Newton with our gradient
         vector x0 = p.copy(); // initial guess for parameters
         (vector p_opt, int iter) = minimisation.newton_c(phi, x0); // optimize parameters using Newton's method

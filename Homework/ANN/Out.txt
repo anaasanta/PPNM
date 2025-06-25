@@ -1,2 +1,4 @@
-Training completed in 265 iterations with final cost: 0.0170555043142933
-Training completed in 144 iterations with final cost: 0.000131586306441847
+Initial cost: 33.0956312795091
+Training completed in 81 iterations with final cost: 0.00515898851116849
+Initial cost: 12.6151280840947
+Training completed in 65 iterations with final cost: 0.000331975678468835
