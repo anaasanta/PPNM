@@ -69,7 +69,7 @@ class main
         var rs = tupleNom.Item1;
         var ys = tupleNom.Item2;
 
-        using (var file = new StreamWriter("wave.dat"))
+        using (var file = new StreamWriter("out_wave.txt"))
         {
             for (int i = 0; i < rs.Count; i++)
             {
@@ -84,7 +84,23 @@ class main
         foreach (var rmaxVal in rmaxVals)
         {
             var (rListTemp, yListTemp) = solveODE.driver(exB.Schrodinger(E0), (rmin, rmaxVal), y0, 0.1);
-            using (var file = new StreamWriter($"wave_rmax_{rmaxVal}.dat"))
+            using (var file = new StreamWriter($"out_wave_rmax_{rmaxVal}.txt"))
+            {
+                for (int i = 0; i < rListTemp.Count; i++)
+                {
+                    double r = rListTemp[i];
+                    double f = yListTemp[i][0];
+                    file.WriteLine($"{r} {f}");
+                }
+            }
+        }
+
+
+        double[] accVals = { 1e-7, 1e-6, 1e-5, 1e-4 };
+        foreach (var accVal in accVals)
+        {
+            var (rListTemp, yListTemp) = solveODE.driver(exB.Schrodinger(E0), (rmin, rmax), y0, 0.1, accVal);
+            using (var file = new StreamWriter($"out_wave_acc_{accVal}.txt"))
             {
                 for (int i = 0; i < rListTemp.Count; i++)
                 {
@@ -99,7 +115,7 @@ class main
         foreach (var rminVal in rminVals)
         {
             var (rListTemp, yListTemp) = solveODE.driver(exB.Schrodinger(E0), (rminVal, rmax), y0, 0.1);
-            using (var file = new StreamWriter($"wave_rmin_{rminVal}.dat"))
+            using (var file = new StreamWriter($"out_wave_rmin_{rminVal}.txt"))
             {
                 for (int i = 0; i < rListTemp.Count; i++)
                 {
@@ -110,26 +126,12 @@ class main
             }
         }
 
-        double[] accVals = { 1e-7, 1e-6, 1e-5, 1e-4 };
-        foreach (var accVal in accVals)
-        {
-            var (rListTemp, yListTemp) = solveODE.driver(exB.Schrodinger(E0), (rmin, rmax), y0, 0.1, accVal);
-            using (var file = new StreamWriter($"wave_acc_{accVal}.dat"))
-            {
-                for (int i = 0; i < rListTemp.Count; i++)
-                {
-                    double r = rListTemp[i];
-                    double f = yListTemp[i][0];
-                    file.WriteLine($"{r} {f}");
-                }
-            }
-        }
 
         double[] epsVals = { 1e-7, 1e-6, 1e-5, 1e-4 };
         foreach (var e in epsVals)
         {
             var (rListTemp, yListTemp) = solveODE.driver(exB.Schrodinger(E0), (rmin, rmax), y0, 0.1, acc, e);
-            using (var file = new StreamWriter($"wave_eps_{e}.dat"))
+            using (var file = new StreamWriter($"out_wave_eps_{e}.txt"))
             {
                 for (int i = 0; i < rListTemp.Count; i++)
                 {
