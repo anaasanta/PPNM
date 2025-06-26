@@ -1,3 +1,0 @@
-Quasi-random: Area = 3.1404, Error = 0.0116178479934969, Actual Error = 0.00119265358979304
-Pseudo-random: Area = 3.1416, Error = 0.0164217826072567, Actual Error = 7.34641020683213E-06
-Stratified: Area = 3.14541763366906, Error = 0.015733211724109, Actual Error = 0.00382498007926513
