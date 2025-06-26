@@ -1,0 +1,13 @@
+C# integrator calls (inf):
+Test of infinite-limit integrals with integrate_generalized
+
+exp(x):	 Generalized integrator value:2.71838145E+000	 Exact value:2.71828183E+000	 Error:9.96E-005	 Number of calls:104
+
+x*exp(-x):	 Generalized integrator value:9.99961439E-001	 Exact value:1.00000000E+000	 Error:3.86E-005	 Number of calls:120
+
+exp(-x^2):	 Generalized integrator value:1.77178873E+000	 Exact value:1.77245385E+000	 Error:6.65E-004	 Number of calls:160
+
+Python quad calls (inf):
+exp(x)               calls=    75  result=2.71828183e+00  err_est=1.54e-04
+x*exp(-x)            calls=   105  result=1.00000000e+00  err_est=6.36e-06
+exp(-x^2)            calls=   150  result=1.77245385e+00  err_est=4.32e-06

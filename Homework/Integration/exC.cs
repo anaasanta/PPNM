@@ -15,13 +15,14 @@ class exC
             ("ln(x)/sqrt(x)",  x => Log(x)/Sqrt(x),  0.0, 1.0, -4.0)
         };
 
-        WriteLine($"Name\tcomputed\test_err\tactual_err");
+        WriteLine($"Index\tName\tcomputed\test_err\tactual_err");
 
         foreach (var test in tests)
         {
             var (Q, err_est) = integrator.integrate_error(test.f, test.a, test.b, 1e-6, 1e-6);
             double actual_err = Abs(Q - test.exact);
-            WriteLine($"{test.name}\t{Q:E8}\t{err_est:E2}\t{actual_err:E2}");
+            int index = Array.IndexOf(tests, test) + 1; // index starts from 1
+            WriteLine($"{index}\t{test.name}\t{Q:E8}\t{err_est:E2}\t{actual_err:E2}");
         }
 
         return 0;

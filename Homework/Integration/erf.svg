@@ -144,24 +144,24 @@
 	</g>
 </g>
 <g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
-	<path stroke='rgb(  0,   0, 255)'  d='M189.99,72.01 L232.55,72.01 M72.53,422.40 L156.25,421.54 L239.96,393.43 L281.82,334.08 L323.68,238.20 L365.53,142.33
-		L407.39,82.98 L449.25,60.25 L491.11,54.87 L574.82,54.01  '/>	<use xlink:href='#gpPt6' transform='translate(72.53,422.40) scale(4.50)' color='rgb(  0,   0, 255)'/>
-	<use xlink:href='#gpPt6' transform='translate(156.25,421.54) scale(4.50)' color='rgb(  0,   0, 255)'/>
+	<path stroke='rgb(  0,   0, 255)'  d='M189.99,72.01 L232.55,72.01 M72.53,422.40 L156.25,421.46 L239.96,393.43 L281.82,334.07 L323.68,238.20 L365.53,142.34
+		L407.39,82.98 L449.25,60.19 L491.11,54.95 L574.82,54.01  '/>	<use xlink:href='#gpPt6' transform='translate(72.53,422.40) scale(4.50)' color='rgb(  0,   0, 255)'/>
+	<use xlink:href='#gpPt6' transform='translate(156.25,421.46) scale(4.50)' color='rgb(  0,   0, 255)'/>
 	<use xlink:href='#gpPt6' transform='translate(239.96,393.43) scale(4.50)' color='rgb(  0,   0, 255)'/>
-	<use xlink:href='#gpPt6' transform='translate(281.82,334.08) scale(4.50)' color='rgb(  0,   0, 255)'/>
+	<use xlink:href='#gpPt6' transform='translate(281.82,334.07) scale(4.50)' color='rgb(  0,   0, 255)'/>
 	<use xlink:href='#gpPt6' transform='translate(323.68,238.20) scale(4.50)' color='rgb(  0,   0, 255)'/>
-	<use xlink:href='#gpPt6' transform='translate(365.53,142.33) scale(4.50)' color='rgb(  0,   0, 255)'/>
+	<use xlink:href='#gpPt6' transform='translate(365.53,142.34) scale(4.50)' color='rgb(  0,   0, 255)'/>
 	<use xlink:href='#gpPt6' transform='translate(407.39,82.98) scale(4.50)' color='rgb(  0,   0, 255)'/>
-	<use xlink:href='#gpPt6' transform='translate(449.25,60.25) scale(4.50)' color='rgb(  0,   0, 255)'/>
-	<use xlink:href='#gpPt6' transform='translate(491.11,54.87) scale(4.50)' color='rgb(  0,   0, 255)'/>
+	<use xlink:href='#gpPt6' transform='translate(449.25,60.19) scale(4.50)' color='rgb(  0,   0, 255)'/>
+	<use xlink:href='#gpPt6' transform='translate(491.11,54.95) scale(4.50)' color='rgb(  0,   0, 255)'/>
 	<use xlink:href='#gpPt6' transform='translate(574.82,54.01) scale(4.50)' color='rgb(  0,   0, 255)'/>
 	<use xlink:href='#gpPt6' transform='translate(211.27,72.01) scale(4.50)' color='rgb(  0,   0, 255)'/>
 </g>
 	</g>
-	<g id="gnuplot_plot_2" ><title>MathNet Erf</title>
+	<g id="gnuplot_plot_2" ><title>Exact Erf</title>
 <g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
 	<g transform="translate(181.60,93.91)" stroke="none" fill="black" font-family="Arial" font-size="12.00"  text-anchor="end">
-		<text><tspan font-family="Arial" >MathNet Erf</tspan></text>
+		<text><tspan font-family="Arial" >Exact Erf</tspan></text>
 	</g>
 </g>
 <g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">

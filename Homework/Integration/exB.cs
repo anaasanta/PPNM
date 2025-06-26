@@ -6,7 +6,7 @@ class exB
 {
     static int Main(string[] args)
     {
-        // 1. Integrals we are going to test:
+        // 1. Integrals we are going to test for Clenshaw-Curtis method:
         var tests = new (string name, Func<double, double> f, double a, double b, double exact)[]
         {
             ("1/sqrt(x)",      x => 1.0/Sqrt(x),     0.0, 1.0, 2.0),
@@ -28,7 +28,7 @@ class exB
 
             WriteLine($"Function = {name}, Exact = {exact:E}");
             WriteLine($"\t\tComputed with Clenshaw-Curtis= {val:E}, Function calls = {calls}, Error = {Abs(val - exact):E}");
-            WriteLine($"\t\tComputed with ordinary integrator= {val2:E}, Error with exact value = {Abs(val2 - exact):E}, Error with Clenshaw-Curtis = {Abs(val2 - val):E}");
+            WriteLine($"\t\tComputed with ordinary integrator= {val2:E}, Function calls = {integrator.ncalls}, Error with exact value = {Abs(val2 - exact):E}, Error with Clenshaw-Curtis = {Abs(val2 - val):E}");
             integrator.ncalls = 0; // reset call count for next test
 
             // Check that integrator returns results within the given accuracy goals.
@@ -42,13 +42,15 @@ class exB
             }
         }
 
+
+        // 2. Integrals with infinite limits
         var tests_inf = new (string name, Func<double, double> f, double a, double b, double exact)[] {
             ("exp(x)",    x => Exp(x), double.NegativeInfinity, 1.0, Exp(1)),
             ("x*exp(-x)",  x => x*Exp(-x), 0.0, double.PositiveInfinity, 1.0),
             ("exp(-x^2)",   x => Exp(-x*x), double.NegativeInfinity, double.PositiveInfinity, Sqrt(PI)),
         };
 
-        using (var file = new StreamWriter("exB_inf.txt"))
+        using (var file = new StreamWriter("out_exB_inf.txt"))
         {
             file.WriteLine($"Test of infinite-limit integrals with integrate_generalized\n");
             foreach (var test in tests_inf)

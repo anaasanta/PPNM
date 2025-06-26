@@ -45,7 +45,7 @@ class exA
         double[] zs = { -3.0, -2.0, -1.0, -0.5, 0.0, 0.5, 1.0, 1.5, 2.0, 3.0 };
         double[] exactErfs = { -0.9999779095030014, -0.9953222650189527, -0.84270079294971486934, -0.5204998778130465, 0.0, 0.5204998778130465, 0.84270079294971486934, 0.9661051464753108, 0.9953222650189527, 0.9999779095030014 };
 
-        using (var file = new StreamWriter("erf.txt"))
+        using (var file = new StreamWriter("out_erf.txt"))
         {
             for (int i = 0; i < zs.Length; i++)
             {
@@ -59,7 +59,7 @@ class exA
 
 
         //3. Calculate erf(1) with eps=0 and decreasing acc= 0.1, 0.01, 0.001, which we'll plot in log-log scale.
-        using (var file = new StreamWriter("erf1.txt"))
+        using (var file = new StreamWriter("out_erf1.txt"))
         {
             double z1 = 1.0;
             double exactErf1 = 0.84270079294971486934;

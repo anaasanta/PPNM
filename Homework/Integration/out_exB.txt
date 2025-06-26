@@ -2,13 +2,13 @@ Testing Clenshaw-Curtis integrator on known integrals:
 
 Function = 1/sqrt(x). Exact = 2.000000E+000
 		Computed with Clenshaw-Curtis= 1.999992E+000. Function calls = 32. Error = 7.989536E-006
-		Computed with ordinary integrator= 1.999962E+000. Error with exact value = 3.849992E-005. Error with Clenshaw-Curtis = 3.051039E-005
+		Computed with ordinary integrator= 1.999962E+000. Function calls = 8572. Error with exact value = 3.849992E-005. Error with Clenshaw-Curtis = 3.051039E-005
 
 		With Clenshaw-Curtis. 1/sqrt(x) integral passed. 
 
 Function = ln(x)/sqrt(x). Exact = -4.000000E+000
 		Computed with Clenshaw-Curtis= -3.999874E+000. Function calls = 192. Error = 1.261435E-004
-		Computed with ordinary integrator= -3.999917E+000. Error with exact value = 8.294100E-005. Error with Clenshaw-Curtis = 4.320254E-005
+		Computed with ordinary integrator= -3.999917E+000. Function calls = 8604. Error with exact value = 8.294100E-005. Error with Clenshaw-Curtis = 4.320254E-005
 
 		With Clenshaw-Curtis. ln(x)/sqrt(x) integral passed. 
 
