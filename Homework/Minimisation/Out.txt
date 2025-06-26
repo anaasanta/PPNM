@@ -1,12 +1,17 @@
+=============== Exercise A: Newton's method with numerical gradient, numerical Hessian matrix and back-tracking linesearch ===============
 Running Newton's method on Rosenbrock function...
 Rosenbrock minimum: (0.999879545408398, 0.999758132292078), iterations: 20
 
-Running Newton's method on Himmelblau's function...
+Running Newton's method on Himmelblau function...
 Himmelblau minimum: (-2.8051315751519, 3.13131366562992), iterations: 3
+
+=============== Exercise B: Higgs Bosson discovery ===============
 
 Running Newton's method on Breit-Wigner fit...
 Converged in 10 iterations.
 Fitted parameters: m = 125.972185379146, Gamma = 2.0864168176945, A = 9.87657754232932
+
+=============== Exercise C: Central instead of forward finite difference approximation for the derivatives ===============
 
  Rosenbrock minimum, with forward v central difference starting at (-1.2, 1)
 	Forward difference:

@@ -132,7 +132,6 @@ public static class minimisation
             H[j, j] = (fplus[j] - 2 * phi0 + fminus[j]) / (h[j] * h[j]);
         }
 
-        // off-diagonal terms
         for (int i = 0; i < n; i++)
         {
             for (int j = i + 1; j < n; j++)
