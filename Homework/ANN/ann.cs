@@ -10,8 +10,8 @@ public class ann
     Func<double, double> f = x => x * Exp(-x * x); /* activation function */
     Func<double, double> df = x => (1 - 2 * x * x) * Exp(-x * x); /* derivative of the activation function */
     Func<double, double> d2f = x => (-6 * x + 4 * x * x * x) * Exp(-x * x); /* second derivative of the activation function */
-
     Func<double, double> F = x => -Exp(-x * x) / 2; /* antiderivative of the activation function*/
+
     public vector p; /* network parameters */
     private vector xs;
     private vector ys;
@@ -34,7 +34,7 @@ public class ann
 
             }
             p[3 * i + 1] = 0.5 + rand.NextDouble(); // b_i = 0.5 + random value in [0, 1]
-            p[3 * i + 2] = 1;
+            p[3 * i + 2] = 1.0;
         }
     }
 
@@ -46,10 +46,10 @@ public class ann
         {
             double ai = p[3 * i];
             double bi = p[3 * i + 1];
-            double wi = p[3 * i + 2]; // weight of hidden neuron
-            sum += wi * f((x - ai) / bi); // compute the contribution of each hidden neuron, where f is the activation function
+            double wi = p[3 * i + 2];
+            sum += wi * f((x - ai) / bi); // compute the contribution of each hidden neuron
         }
-        return sum; // return the final output 
+        return sum;
     }
 
     public double response_derivative(double x)
@@ -60,10 +60,10 @@ public class ann
         {
             double ai = p[3 * i];
             double bi = p[3 * i + 1];
-            double wi = p[3 * i + 2]; // weight of hidden neuron
-            sum += wi * df((x - ai) / bi) / bi; // compute the contribution of each hidden neuron, where df is the derivative of the activation function
+            double wi = p[3 * i + 2];
+            sum += wi * df((x - ai) / bi) / bi; // compute the contribution of each hidden neuron
         }
-        return sum; // return the final output
+        return sum;
     }
 
     public double response_derivative2(double x)
@@ -74,10 +74,10 @@ public class ann
         {
             double ai = p[3 * i];
             double bi = p[3 * i + 1];
-            double wi = p[3 * i + 2]; // weight of hidden neuron
-            sum += wi * d2f((x - ai) / bi) / (bi * bi); // compute the contribution of each hidden neuron, where d2f is the second derivative of the activation function
+            double wi = p[3 * i + 2];
+            sum += wi * d2f((x - ai) / bi) / (bi * bi); // compute the contribution of each hidden neuron
         }
-        return sum; // return the final output
+        return sum;
     }
 
     public double response_antiderivative(double x)
@@ -88,10 +88,10 @@ public class ann
         {
             double ai = p[3 * i];
             double bi = p[3 * i + 1];
-            double wi = p[3 * i + 2]; // weight of hidden neuron
-            sum += wi * F((x - ai) / bi) * bi; // compute the contribution of each hidden neuron, where F is the antiderivative of the activation function
+            double wi = p[3 * i + 2];
+            sum += wi * F((x - ai) / bi) * bi; // compute the contribution of each hidden neuron
         }
-        return sum; // return the final output
+        return sum;
     }
 
     //Cost function C(p) = sum_k (F_p(x_k) - y_k)^2 / n
@@ -117,7 +117,8 @@ public class ann
 
         Func<vector, double> phi = p => cost(p); // cost function
 
-        WriteLine($"Initial cost: {cost(p)}"); // print initial cost
+        WriteLine($"Initial cost: {cost(p)}"); // print initial cost. I put it to see if the cost function is working correctly
+
         // Newton with our gradient
         vector x0 = p.copy(); // initial guess for parameters
         (vector p_opt, int iter) = minimisation.newton_c(phi, x0); // optimize parameters using Newton's method
