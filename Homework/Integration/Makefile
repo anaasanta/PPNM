@@ -41,7 +41,7 @@ out_compare_calls.txt: out_exB.txt python_calls.txt
 out_compare_calls_inf.txt: out_exB_inf.txt python_calls_inf.txt
 	@echo "C# integrator calls (inf):" >> out_compare_calls_inf.txt
 	@cat out_exB_inf.txt >> out_compare_calls_inf.txt
-	@echo "" >> compare_calls_inf.txt
+	@echo "" >> out_compare_calls_inf.txt
 	@echo "Python quad calls (inf):" >> out_compare_calls_inf.txt
 	@cat python_calls_inf.txt >> out_compare_calls_inf.txt
 
